@@ -1,0 +1,39 @@
+﻿// Author: Nikola Machálková
+// Date: 19/11/2022
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace JustNote.Backend.Data
+{
+    // structure of a one single page:
+    // Title -- the name of the page
+    // Notes -- every note on the page
+    // DateTime -- when was this page created (how the heck should this stay the same? Because this should only happen once, right)
+
+    public class Data
+    {
+        public string Title { get; set; }
+
+        // this is its own class, because Dictionary wasnt enough
+        // contains: number of the note, text of the note, position of the note
+        // TODO(?): maybe add size of windows? 
+        public Note Notes { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public Data()
+        {
+
+        }
+        public Data(string title, Note notes, DateTime date)
+        {
+            Title = title;
+            Notes = notes;
+            Date = date;
+        }
+    }
+}

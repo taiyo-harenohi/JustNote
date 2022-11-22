@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustNote.App", "JustNote\JustNote.App.csproj", "{C6CD9ED3-8D6D-4B88-983C-561DB117D6D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6F0EF388-F2FE-4C87-9DC7-F139E6076B0B} = {6F0EF388-F2FE-4C87-9DC7-F139E6076B0B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustNote.Backend", "JustNote.Backend\JustNote.Backend.csproj", "{6F0EF388-F2FE-4C87-9DC7-F139E6076B0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6CD9ED3-8D6D-4B88-983C-561DB117D6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6CD9ED3-8D6D-4B88-983C-561DB117D6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6CD9ED3-8D6D-4B88-983C-561DB117D6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6CD9ED3-8D6D-4B88-983C-561DB117D6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F0EF388-F2FE-4C87-9DC7-F139E6076B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0EF388-F2FE-4C87-9DC7-F139E6076B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0EF388-F2FE-4C87-9DC7-F139E6076B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0EF388-F2FE-4C87-9DC7-F139E6076B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6348362D-749F-4788-9AE6-6149851490BF}
+	EndGlobalSection
+EndGlobal

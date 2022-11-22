@@ -1,0 +1,56 @@
+﻿<!-- 
+// Author: Nikola Machálková
+// Date: 19/11/2022
+-->
+    <Window x:Class="JustNote.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JustNote"
+        mc:Ignorable="d"
+        Background="#FFF1E6"
+        Title="MainWindow" Height="700" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Grid.Row="0"></Button>
+        <!-- binding calendar viewmodel here-->
+        <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
+                Background="Transparent" BorderThickness="0">
+            <Image Source="Graphics/calendar_icon.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
+        </Button>
+        <!-- binding Date (has two parts: date and time) here -->
+        <TextBlock Grid.Row="1" Grid.Column="2" Foreground="#A5A58D"></TextBlock>
+        <!-- binding Title here -->
+        <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0" 
+                 Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
+        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
+              VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
+        <!-- binding Text here-->
+        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" FontStretch="Expanded" FontSize="35"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsTab="True"
+                 Margin="0,5,0,0" Background="#EDDCD2" BorderThickness="0" TextWrapping="Wrap" 
+                 AcceptsReturn="True"></TextBox>
+        <!-- binding settings viewmodel here-->
+        <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
+                Background="Transparent" BorderThickness="0">
+            <Image Source="Graphics/menu_icon.png"></Image>
+        </Button>
+    </Grid>
+</Window>
