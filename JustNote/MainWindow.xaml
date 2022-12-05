@@ -30,6 +30,7 @@
         </Grid.RowDefinitions>
         <Button Grid.Column="1" Grid.Row="0"></Button>
         <!-- binding calendar viewmodel here-->
+        <!-- TODO: DELETE THE BINDING TO CALENDAR VIEW LATER and change it to MVVM thing-->
         <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">
             <Image Source="Graphics/calendar_icon.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
@@ -43,10 +44,9 @@
         <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
         <!-- binding Text here-->
-        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" FontStretch="Expanded" FontSize="35"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsTab="True"
-                 Margin="0,5,0,0" Background="#EDDCD2" BorderThickness="0" TextWrapping="Wrap" 
-                 AcceptsReturn="True"></TextBox>
+        <Canvas Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 Margin="0,5,0,0" Background="#FFF1E6"></Canvas>
         <!-- binding settings viewmodel here-->
         <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">

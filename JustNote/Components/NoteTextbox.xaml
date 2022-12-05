@@ -1,0 +1,17 @@
+﻿<!-- 
+// Author: Nikola Machálková
+// Date: 5/12/2022
+-->
+<UserControl x:Class="JustNote.App.Components.NoteTextbox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JustNote.App.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="200">
+    <Grid>
+        <TextBox Name="tbNote" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
+                 FontSize="35" TextWrapping="Wrap"></TextBox>
+    </Grid>
+</UserControl>

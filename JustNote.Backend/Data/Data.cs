@@ -17,10 +17,6 @@ namespace JustNote.Backend.Data
     public class Data
     {
         public string Title { get; set; }
-
-        // this is its own class, because Dictionary wasnt enough
-        // contains: number of the note, text of the note, position of the note
-        // TODO(?): maybe add size of windows? 
         public Note Notes { get; set; }
 
         public DateTime Date { get; set; }
