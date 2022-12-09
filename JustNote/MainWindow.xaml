@@ -7,10 +7,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:JustNote"
+        xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
         Title="MainWindow" Height="700" Width="1000">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding FetchDateData}"
+                                 CommandParameter="{Binding Source={x:Static sys:DateTime.Today}}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -39,14 +49,37 @@
         <TextBlock Grid.Row="1" Grid.Column="2" Foreground="#A5A58D"></TextBlock>
         <!-- binding Title here -->
         <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
+                 Text="{Binding DateData.Title}"
                  Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
         <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
         <!-- binding Text here-->
-        <Canvas Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                 Margin="0,5,0,0" Background="#FFF1E6"></Canvas>
+        <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas Name="DateCanvas"  Background="#FFF1E6">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseLeftButtonDown">
+                                <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
+                                     CommandParameter="{Binding ElementName=DateCanvas}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <TextBox Name="tbNote" Text="{Binding Text}" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
+                         FontSize="35" TextWrapping="Wrap" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"></TextBox>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+                          
+            
         <!-- binding settings viewmodel here-->
         <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">
