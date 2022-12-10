@@ -1,6 +1,5 @@
 ﻿
 // Author: Lukáš Leták
-// Date: 8/12/2022
 
 using System;
 using System.Collections.Generic;
@@ -25,8 +24,7 @@ namespace JustNote.App.Services
 
             //var DataOBJ = GetDateDataAsync(date,title);
             var Reader = new ReadingData();
-            var keyword = title + date.ToString("dd/mm/yyyy");
-            return Reader.Read(keyword);
+            return Reader.Read(title, date.ToString("dd/mm/yyyy"));
         }
 
         public void SaveDateData(Data data)

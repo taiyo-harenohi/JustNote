@@ -30,7 +30,7 @@
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
         <!-- bind going back to main view/hiding this view again -->
-        <Button Grid.Row="1" Grid.Column="0" MinHeight="70" Background="Transparent" BorderThickness="0" Command="{Binding HideCalendarCommand}>
+        <Button Grid.Row="1" Grid.Column="0" MinHeight="70" Background="Transparent" BorderThickness="0" Command="{Binding HideCalendarCommand}">
             <Image Source="../Graphics/close.png" Height="70" MinHeight="70" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
         </Button>
         

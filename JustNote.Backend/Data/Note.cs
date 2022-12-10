@@ -10,11 +10,11 @@ namespace JustNote.Backend.Data
 {
     public class Note
     {
-        public List<int> Key { get; set; }
-        public List<string> Text { get; set; }
-        public List<int[]> Position { get; set; }
+        public int Key { get; set; }
+        public string Text { get; set; }
+        public int[] Position { get; set; }
 
-        public Note(List<int> key, List<string> text, List<int[]> position)
+        public Note(int key, string text, int[] position)
         {
             Key = key;
             Text = text;

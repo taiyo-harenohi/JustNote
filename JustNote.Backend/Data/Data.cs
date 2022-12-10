@@ -16,7 +16,7 @@ namespace JustNote.Backend.Data
     public class Data
     {
         public string Title { get; set; }
-        public Note Notes { get; set; }
+        public List<Note> Notes { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -24,7 +24,7 @@ namespace JustNote.Backend.Data
         {
 
         }
-        public Data(string title, Note notes, DateTime date)
+        public Data(string title, List<Note> notes, DateTime date)
         {
             Title = title;
             Notes = notes;

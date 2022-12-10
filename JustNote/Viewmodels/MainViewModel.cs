@@ -1,6 +1,5 @@
 ﻿
 // Author: Lukáš Leták
-// Date: 9/12/2022
 
 using System;
 using System.Collections.Generic;
@@ -124,6 +123,7 @@ namespace JustNote.App.Viewmodels
         {
             CalendarViewModel.CalendarViewVisible = true;
         }
+
         private void LoadDateData(DateTime date, string title)
         {
             DateData = _dataService.GetDateData(date,title);

@@ -1,6 +1,5 @@
 ﻿
 // Author: Lukáš Leták
-// Date: 10/12/2022
 
 using System;
 using System.Collections.Generic;
@@ -45,6 +44,7 @@ namespace JustNote.App.Viewmodels
         private void SendDateToMain(DateTime date)
         {
             Mediator.Send("SetDate", date);
+
         }
         private void HideCalendar()
         {

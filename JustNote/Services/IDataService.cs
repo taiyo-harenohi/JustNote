@@ -1,6 +1,5 @@
 ﻿
 // Author: Lukáš Leták
-// Date: 8/12/2022
 
 using System;
 using System.Collections.Generic;
