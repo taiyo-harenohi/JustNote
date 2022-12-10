@@ -17,9 +17,9 @@ namespace JustNote.App.Views
     /// <summary>
     /// Interakční logika pro SpalshScreen.xaml
     /// </summary>
-    public partial class SpalshScreen : Window
+    public partial class SplashScreen : Window
     {
-        public SpalshScreen()
+        public SplashScreen()
         {
             InitializeComponent();
         }

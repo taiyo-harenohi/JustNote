@@ -1,6 +1,5 @@
 ﻿<!-- 
-// Author: Nikola Machálková
-// Date: 5/12/2022
+// Author: Nikola Machálková (structure, calendar)
 -->
 <UserControl x:Class="JustNote.App.Views.ViewCalendar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -9,7 +8,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JustNote.App.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="350">
+             d:DesignHeight="650" d:DesignWidth="350">
     <Grid Background="#D0CAB8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30*"></ColumnDefinition>
@@ -28,15 +27,56 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
+        <!-- bind going back to main view/hiding this view again -->
         <Button Grid.Row="1" Grid.Column="0" MinHeight="50" ></Button>
-        <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" MinHeight="85" MinWidth="350">
+        
+        <!-- binding date and time of the note here-->
+        <Label Grid.Row="1" Grid.Column="1" Foreground="#957D60"></Label>
+        
+        <!-- bind calendar function - clicking on different date and showing dates according to it, -->
+        <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" MinHeight="50" MinWidth="350">
             <Calendar x:Name="calendar" Background="#D0CAB8" BorderThickness="0" Foreground="#C69D7B"></Calendar>
         </Viewbox>
-        <!-- Bind notes for this day here-->
-        <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="#A5A58D" MinHeight="40"></Label>
-        <ListView Grid.Row="6" Grid.ColumnSpan="2" MinHeight="120"></ListView>
-        <!-- Found keyword inputted below-->
-        <Label Grid.Row="8" Grid.ColumnSpan="2" MinHeight="40" Background="#A5A58D"></Label>
-        <TextBox Grid.Row="9" MinHeight="60" Grid.ColumnSpan="2"></TextBox>
+        <!-- bind notes for this day here-->
+        <!--TODO-delete-later: they should be probably clickable, already can imagine Beran saying sth like "nEiNTuITIvní-->
+        <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="#A5A58D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60*"></ColumnDefinition>
+                <ColumnDefinition Width="40*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"  MinHeight="30" Foreground="#FFF1E6" Content="Notes" FontSize="18" FontStretch="Expanded"></Label>
+            <!-- bindind making new note -->
+            <Button Grid.Column="1"></Button>
+        </Grid>
+        <ListView Grid.Row="6" Grid.ColumnSpan="2" MinHeight="100" Background="#B7B7A4">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Button Background="Transparent" BorderThickness="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="60*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!-- bind title of note here-->
+                            <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="10" FontStretch="Expanded" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                            <!-- bind date of note here-->
+                            <Label Grid.Column="1" Foreground="#957D60" FontSize="10" FontStretch="Expanded" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!-- binding find keyword written below-->
+        <Label Grid.Row="8" Grid.ColumnSpan="2" MinHeight="30" Background="#A5A58D" Content="Find Keyword" Foreground="#FFF1E6" FontSize="18" FontStretch="Expanded"></Label>
+        <Grid Grid.Row="9" MinHeight="40" Grid.Column="0" Grid.ColumnSpan="2" Background="#B7B7A4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!-- keyword input-->
+            <TextBox Grid.Column="0" BorderBrush="#B7B7A4" BorderThickness="3" FontStretch="Expanded" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#A5A58D" Foreground="#957D60"></TextBox>
+            <!-- bind button for opening window ViewFoundKeyword with found notes with keyword in title -->
+            <Button Grid.Column="1" BorderThickness="0"></Button>
+        </Grid>
     </Grid>
 </UserControl>

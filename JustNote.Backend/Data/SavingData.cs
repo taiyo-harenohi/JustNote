@@ -1,5 +1,4 @@
 ﻿// Author: Nikola Machálková
-// Date: 19/11/2022
 
 using System;
 using System.Collections.Generic;
@@ -13,17 +12,25 @@ namespace JustNote.Backend.Data
 {
     public class SavingData
     {
+        // method for saving data (as in: whole page)
         public void Save(Data data)
         {
             string trimmedDate = TrimDate(data.Date);
+
+            // if directories doesn't exist yet -> create them
 
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"/.data/"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"/.data/");
             }
 
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/";
-            string filename = data.Title + "_" + trimmedDate + ".json";
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + trimmedDate + "/";
+            if (!Directory.Exists(filepathDirectory))
+            {
+                Directory.CreateDirectory(filepathDirectory);
+            }
+
+            string filename = data.Title + ".json";
 
             using (StreamWriter sw = new StreamWriter(filepathDirectory + "/" + filename))
             {
@@ -31,7 +38,7 @@ namespace JustNote.Backend.Data
             }
         }
 
-        // method for getting rid off forbidden characters
+        // method for getting rid off forbidden characters in a file name
         private string TrimDate(DateTime date)
         {
             string trimmedWhitespace = date.ToString().Replace(' ', '_');

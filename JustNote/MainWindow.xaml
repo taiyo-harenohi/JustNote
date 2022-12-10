@@ -1,6 +1,5 @@
 ﻿<!-- 
-// Author: Nikola Machálková
-// Date: 19/11/2022
+// Author: Nikola Machálková (structure, graphic design)
 -->
     <Window x:Class="JustNote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,7 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JustNote"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Background="#FFF1E6"
         Title="MainWindow" Height="700" Width="1000">
     <Grid>
@@ -30,7 +29,6 @@
         </Grid.RowDefinitions>
         <Button Grid.Column="1" Grid.Row="0"></Button>
         <!-- binding calendar viewmodel here-->
-        <!-- TODO: DELETE THE BINDING TO CALENDAR VIEW LATER and change it to MVVM thing-->
         <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">
             <Image Source="Graphics/calendar_icon.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>

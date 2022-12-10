@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Graphics\calendar_icon.png" />
+    <None Remove="Graphics\close_icon.png" />
+    <None Remove="Graphics\loading.png" />
     <None Remove="Graphics\menu_icon.png" />
   </ItemGroup>
 
@@ -18,6 +20,8 @@
 
   <ItemGroup>
     <Resource Include="Graphics\calendar_icon.png" />
+    <Resource Include="Graphics\close_icon.png" />
+    <Resource Include="Graphics\loading.png" />
     <Resource Include="Graphics\menu_icon.png" />
   </ItemGroup>
 
