@@ -1,5 +1,5 @@
 ﻿<!-- 
-// Author: Nikola Machálková (structure, graphic design, icons)
+// Author: Nikola Machálková
 -->
     <Window x:Class="JustNote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

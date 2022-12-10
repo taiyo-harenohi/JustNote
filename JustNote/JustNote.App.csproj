@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Graphics\calendar_icon.png" />
-    <None Remove="Graphics\close_icon.png" />
-    <None Remove="Graphics\loading.png" />
-    <None Remove="Graphics\menu_icon.png" />
+    <None Remove="Graphics\calendar.png" />
+    <None Remove="Graphics\close.png" />
+    <None Remove="Graphics\menu.png" />
+    <None Remove="Graphics\title.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Graphics\calendar_icon.png" />
-    <Resource Include="Graphics\close_icon.png" />
-    <Resource Include="Graphics\loading.png" />
-    <Resource Include="Graphics\menu_icon.png" />
+    <Resource Include="Graphics\calendar.png" />
+    <Resource Include="Graphics\close.png" />
+    <Resource Include="Graphics\menu.png" />
+    <Resource Include="Graphics\title.png" />
   </ItemGroup>
 
 </Project>
