@@ -15,10 +15,9 @@ namespace JustNote.Backend.Data
         // method for saving data (as in: whole page)
         public void Save(Data data)
         {
-            string trimmedDate = TrimDate(data.Date);
+            string trimmedDate = TrimDate(data.Date.ToString("dd/MM/yy"));
 
             // if directories doesn't exist yet -> create them
-
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"/.data/"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"/.data/");
@@ -30,21 +29,24 @@ namespace JustNote.Backend.Data
                 Directory.CreateDirectory(filepathDirectory);
             }
 
-            string filename = data.Title + ".json";
 
-            using (StreamWriter sw = new StreamWriter(filepathDirectory + "/" + filename))
+            string filename = TrimTitle(data.Title + ".json");
+
+            using (StreamWriter sw = new StreamWriter(filepathDirectory + filename))
             {
                 sw.WriteLine(JsonSerializer.Serialize(data));
             }
         }
 
-        // method for getting rid off forbidden characters in a file name
-        private string TrimDate(DateTime date)
+        // methods for getting rid off forbidden characters
+        private string TrimDate(string date)
         {
-            string trimmedWhitespace = date.ToString().Replace(' ', '_');
-            trimmedWhitespace = trimmedWhitespace.Replace(':', '#');
+            return date.Replace(@"/", "_");
+        }
 
-            return trimmedWhitespace.Replace(@"/", "-");
+        private string TrimTitle(string title)
+        {
+            return Path.GetInvalidFileNameChars().Aggregate(title, (current, c) => current.Replace(c.ToString(), string.Empty));
         }
     }
 }
