@@ -22,6 +22,7 @@
                 <RowDefinition Height="10"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" MinHeight="40" Content="EXPORT" FontSize="40"  FontStretch="Expanded" Foreground="#FFF1E6" Background="#A5A58D"></Label>
+            <!--every button will open dialogmenu to get the filepath where to save it; also, bind it to corresponding methods in Justnote.Backend.Data.Export.cs-->
             <Button Grid.Row="2" MinHeight="40" HorizontalAlignment="Left" Background="Transparent" Foreground="#FFF1E6" BorderThickness="0" FontStretch="Expanded" FontSize="30" Content=" Export .pdf" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
             <Button Grid.Row="4" MinHeight="40" HorizontalAlignment="Left" Background="Transparent" Foreground="#FFF1E6" BorderThickness="0" FontStretch="Expanded" FontSize="30" Content=" Export .json" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
             <Button Grid.Row="6" MinHeight="40" HorizontalAlignment="Left" Background="Transparent" Foreground="#FFF1E6" BorderThickness="0" FontStretch="Expanded" FontSize="30" Content=" Export .txt" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
