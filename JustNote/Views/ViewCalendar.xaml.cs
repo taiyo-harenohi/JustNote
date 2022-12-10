@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JustNote.App.Viewmodels;
+using JustNote.App.Services;
+
 
 namespace JustNote.App.Views
 {
@@ -23,6 +26,10 @@ namespace JustNote.App.Views
         public ViewCalendar()
         {
             InitializeComponent();
+
+            CalendarViewModel viewModel = new CalendarViewModel(new DataDiskService(),DateTime.Now);
+
+            DataContext = viewModel;
         }
     }
 }

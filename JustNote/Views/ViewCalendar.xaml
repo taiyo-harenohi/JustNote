@@ -7,8 +7,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
              xmlns:local="clr-namespace:JustNote.App.Views"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance {x:Type viewModels:CalendarViewModel}}"
              d:DesignHeight="700" d:DesignWidth="350">
     <Grid Background="#D0CAB8">
         <Grid.ColumnDefinitions>
@@ -28,9 +30,9 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Grid.Row="1" Grid.Column="0" MinHeight="50" ></Button>
+        <Button Grid.Row="1" Grid.Column="0" MinHeight="50" Command="{Binding HideCalendarCommand}"></Button>
         <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" MinHeight="85" MinWidth="350">
-            <Calendar x:Name="calendar" Background="#D0CAB8" BorderThickness="0" Foreground="#C69D7B"></Calendar>
+            <Calendar x:Name="calendar" Background="#D0CAB8" BorderThickness="0" SelectedDate="{Binding SelectedDate}"  Foreground="#C69D7B" IsTodayHighlighted="False"/>
         </Viewbox>
         <!-- Bind notes for this day here-->
         <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="#A5A58D" MinHeight="40"></Label>

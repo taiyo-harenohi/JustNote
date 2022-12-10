@@ -11,10 +11,15 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:JustNote"
         xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
+        xmlns:views="clr-namespace:JustNote.App.Views"
+        xmlns:converters="clr-namespace:JustNote.App.Converters"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
         Title="MainWindow" Height="700" Width="1000">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding FetchDateData}"
@@ -22,68 +27,74 @@
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="10*"></ColumnDefinition>
-            <ColumnDefinition Width="25*"></ColumnDefinition>
-            <ColumnDefinition Width="10*"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="20"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="35*"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Button Grid.Column="1" Grid.Row="0"></Button>
-        <!-- binding calendar viewmodel here-->
-        <!-- TODO: DELETE THE BINDING TO CALENDAR VIEW LATER and change it to MVVM thing-->
-        <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
-                Background="Transparent" BorderThickness="0">
-            <Image Source="Graphics/calendar_icon.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
-        </Button>
-        <!-- binding Date (has two parts: date and time) here -->
-        <TextBlock Grid.Row="1" Grid.Column="2" Foreground="#A5A58D"></TextBlock>
-        <!-- binding Title here -->
-        <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="35*"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="1" Grid.Row="0" Command="{Binding SaveDateDataCommand}"></Button>
+            <!-- binding calendar viewmodel here-->
+            <!-- TODO: DELETE THE BINDING TO CALENDAR VIEW LATER and change it to MVVM thing-->
+            <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
+                Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
+                <Image Source="Graphics/calendar_icon.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
+            </Button>
+
+            <!-- binding Date (has two parts: date and time) here -->
+            <TextBlock Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="25" Grid.Column="2" Foreground="#A5A58D" Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></TextBlock>
+            <!-- binding Title here -->
+            <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
-                 Text="{Binding DateData.Title}"
+                 Text="{Binding Title}"
                  Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
-        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
+            <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
-        <!-- binding Text here-->
-        <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
+            <!-- binding Text here-->
+            <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas Name="DateCanvas"  Background="#FFF1E6">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="MouseLeftButtonDown">
-                                <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Name="DateCanvas"  Background="#FFF1E6">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="MouseLeftButtonDown">
+                                    <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
                                      CommandParameter="{Binding ElementName=DateCanvas}" />
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Canvas>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Canvas>
-                        <TextBox Name="tbNote" Text="{Binding Text}" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas>
+                            <TextBox Name="tbNote" Text="{Binding Text}" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
                          FontSize="35" TextWrapping="Wrap" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"></TextBox>
-                    </Canvas>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-                          
-            
-        <!-- binding settings viewmodel here-->
-        <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+            <!-- binding settings viewmodel here-->
+            <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">
-            <Image Source="Graphics/menu_icon.png"></Image>
-        </Button>
+                <Image Source="Graphics/menu_icon.png"></Image>
+            </Button>
+        </Grid>
+       
+        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding CalendarViewModel}" Width="348" HorizontalAlignment="Left"/>
+        
     </Grid>
 </Window>

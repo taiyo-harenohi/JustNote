@@ -18,6 +18,7 @@ namespace JustNote.App.Services
             if (title == null)
             {
                 var new_page = new Data();
+                new_page.Date = date;
                 new_page.Title = "New Title";
                 return new_page;
             };
@@ -26,6 +27,12 @@ namespace JustNote.App.Services
             var Reader = new ReadingData();
             var keyword = title + date.ToString("dd/mm/yyyy");
             return Reader.Read(keyword);
+        }
+
+        public void SaveDateData(Data data)
+        {
+            var saver = new SavingData();
+            saver.Save(data);
         }
 
         //protected abstract Data GetDateDataAsync(DateTime date, string title);
