@@ -1,5 +1,5 @@
 ﻿<!-- 
-// Author: Nikola Machálková (structure, graphic design)
+// Author: Nikola Machálková 
 -->
 <UserControl x:Class="JustNote.App.Views.ViewSetting"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
