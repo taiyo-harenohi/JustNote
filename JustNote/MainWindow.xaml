@@ -1,6 +1,5 @@
 ﻿<!-- 
 // Author: Nikola Machálková
-// Date: 19/11/2022
 -->
     <Window x:Class="JustNote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -59,7 +58,7 @@
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
                  Text="{Binding Title}"
                  Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
-            <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
+        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
             <!-- binding Text here-->
             <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"

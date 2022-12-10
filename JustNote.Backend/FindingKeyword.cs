@@ -1,5 +1,4 @@
 ﻿// Author: Nikola Machálková
-// Date: 20/11/2022
 
 using System;
 using System.Collections.Generic;
@@ -12,13 +11,14 @@ namespace JustNote.Backend
 {
     public class FindingKeyword
     {
-        // TODO: in format "Title"
-        // Return: "Title_xx/xx/xxxx_xx:xx:xx_xM"
-        public List<string> FindKeyword(string keyword)
+        // parameters in format keyword as "Title" and date "xx/xx/xxxx_xx:xx:xx_xM"
+        // Return: "Title"
+        public List<string> FindKeyword(string keyword, string date)
         {
             List<string> result = new List<string>();
 
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/";
+            date = TrimText(date);
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
 
             string[] files = Directory.GetFiles(filepathDirectory, "*" + keyword + "*");
 

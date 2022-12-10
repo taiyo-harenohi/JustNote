@@ -1,0 +1,31 @@
+﻿<!-- 
+// Author: Nikola Machálková
+-->
+<UserControl x:Class="JustNote.App.Views.ViewExport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JustNote.App.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="300">
+    <Grid Background="#B7B7A4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" MinHeight="40" Content="EXPORT" FontSize="40"  FontStretch="Expanded" Foreground="#FFF1E6" Background="#A5A58D"></Label>
+            <!--every button will open dialogmenu to get the filepath where to save it; also, bind it to corresponding methods in Justnote.Backend.Data.Export.cs-->
+            <Button Grid.Row="2" MinHeight="40" HorizontalAlignment="Left" Background="Transparent" Foreground="#FFF1E6" BorderThickness="0" FontStretch="Expanded" FontSize="30" Content=" Export .pdf" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
+            <Button Grid.Row="4" MinHeight="40" HorizontalAlignment="Left" Background="Transparent" Foreground="#FFF1E6" BorderThickness="0" FontStretch="Expanded" FontSize="30" Content=" Export .json" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
+            <Button Grid.Row="6" MinHeight="40" HorizontalAlignment="Left" Background="Transparent" Foreground="#FFF1E6" BorderThickness="0" FontStretch="Expanded" FontSize="30" Content=" Export .txt" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
+        </Grid>
+    </Grid>
+</UserControl>

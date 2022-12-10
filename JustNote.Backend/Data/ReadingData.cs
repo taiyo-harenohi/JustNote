@@ -1,5 +1,4 @@
 ﻿// Author: Nikola Machálková
-// Date: 19/11/2022
 
 using System;
 using System.Collections.Generic;
@@ -8,25 +7,34 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Text.Json;
-// todo: delete later
-using System.Diagnostics;
 
 namespace JustNote.Backend.Data
 {
     public class ReadingData
     {
-        // TODO: keyword must be in format "Title xx\xx\xxxx xx:xx:xx xM"
-        public Data Read(string keyword)
+        // keyword must be in format "Title" and date in format "dd/MM/yyyy"
+        public Data Read(string keyword, string date)
         {
-            keyword = TrimText(keyword);
+            keyword = TrimTitle(keyword);
+            date = TrimText(date);
 
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/";
+
+            // if directories doesn't exist yet -> null
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + @"/.data/"))
+            {
+                return null;
+            }
+
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
+            if (!Directory.Exists(filepathDirectory))
+            {
+                return null;
+            }
 
             string jsonFile = "";
-
             try
             {
-                using (StreamReader sr = new StreamReader(filepathDirectory + "/" + keyword + ".json"))
+                using (StreamReader sr = new StreamReader(filepathDirectory + keyword + ".json"))
                 {
                     jsonFile = sr.ReadToEnd();
                 }
@@ -43,10 +51,12 @@ namespace JustNote.Backend.Data
 
         private string TrimText(string date)
         {
-            string trimmedWhitespace = date.Replace(' ', '_');
-            trimmedWhitespace = trimmedWhitespace.Replace(':', '#');
+            return date.Replace(@"/", "_");
+        }
 
-            return trimmedWhitespace.Replace(@"/", "-");
+        private string TrimTitle(string title)
+        {
+            return Path.GetInvalidFileNameChars().Aggregate(title, (current, c) => current.Replace(c.ToString(), string.Empty));
         }
     }
 }
