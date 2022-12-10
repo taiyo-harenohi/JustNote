@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:JustNote"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Background="#FFF1E6"
-        Title="MainWindow" Height="750" Width="1000">
+        Title="MainWindow" Height="800" Width="1000" MinHeight="500" MinWidth="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -21,17 +21,16 @@
             <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="35*"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Grid.Column="1" Grid.Row="0"></Button>
         <!-- binding calendar viewmodel here-->
         <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">
-            <Image Source="Graphics/calendar_icon.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
+            <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
         </Button>
         <!-- binding Date (has two parts: date and time) here -->
         <TextBlock Grid.Row="1" Grid.Column="2" Foreground="#A5A58D"></TextBlock>
@@ -48,7 +47,7 @@
         <!-- binding settings viewmodel here-->
         <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0">
-            <Image Source="Graphics/menu_icon.png"></Image>
+            <Image Source="Graphics/menu.png"></Image>
         </Button>
     </Grid>
 </Window>
