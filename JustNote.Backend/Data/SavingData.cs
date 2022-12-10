@@ -15,7 +15,7 @@ namespace JustNote.Backend.Data
         // method for saving data (as in: whole page)
         public void Save(Data data)
         {
-            string trimmedDate = TrimDate(data.Date.ToString("dd/MM/yy"));
+            string trimmedDate = TrimDate(data.Date.ToString("dd/MM/yyyy"));
 
             // if directories doesn't exist yet -> create them
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"/.data/"))
