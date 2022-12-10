@@ -6,10 +6,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:JustNote.App.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="650" d:DesignWidth="300">
+    <Grid Background="#D0CAB8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!-- bind going back to main view/hiding this view again -->
+        <Button Grid.Row="1" Grid.Column="1" MinHeight="70"></Button>
+        <!-- TODO-delete-later: maybe change this to its own view and viewmodel? -->
+        <Grid Grid.Row="3" MinHeight="200" Grid.ColumnSpan="2" Background="#B7B7A4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" MinHeight="40" FontSize="40" Content=" TEXT" FontStretch="Expanded" Foreground="#FFF1E6" Background="#A5A58D"></Label>
+            <Grid Grid.Row="2" MinHeight="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content=" Font Size" FontStretch="Expanded" FontSize="35" Foreground="#FFF1E6"></Label>
+                <!-- bind text size here-->
+                <TextBox Grid.Column="1" BorderBrush="#B7B7A4" BorderThickness="5" Background="#FFF1E6" Foreground="#CB997E" FontSize="25"></TextBox>
+            </Grid>
+            <Grid Grid.Row="4" MinHeight="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- bind bold text here -->
+                <Button Grid.Column="1" MinWidth="40"></Button>
+                <!-- bind italic text here -->
+                <Button Grid.Column="3" MinWidth="40"></Button>
+                <!-- bind underlined text here -->
+                <Button Grid.Column="5" MinWidth="40"></Button>
+                <!-- bind uppercase/lowercase text here -->
+                <Button Grid.Column="7" MinWidth="40"></Button>
+                <!-- bind alingment of text here -->
+                <Button Grid.Column="9" MinWidth="40"></Button>
+                <!-- bind colour of text here -->
+                <xctk:ColorPicker Grid.Column="11" MinWidth="40" Name="ClrPcker_Background" Background="#FFF1E6"></xctk:ColorPicker>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="5" MinHeight="200"  Grid.ColumnSpan="2" Background="#B7B7A4">
             
+        </Grid>
     </Grid>
 </UserControl>

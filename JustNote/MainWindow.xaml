@@ -1,5 +1,5 @@
 ﻿<!-- 
-// Author: Nikola Machálková (structure, graphic design)
+// Author: Nikola Machálková (structure, graphic design, icons)
 -->
     <Window x:Class="JustNote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:JustNote"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Background="#FFF1E6"
-        Title="MainWindow" Height="700" Width="1000">
+        Title="MainWindow" Height="750" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -39,7 +39,7 @@
         <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0" 
                  Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
-        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="2500" 
+        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
         <!-- binding Text here-->
         <Canvas Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"

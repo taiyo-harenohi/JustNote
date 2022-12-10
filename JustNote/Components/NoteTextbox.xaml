@@ -1,6 +1,5 @@
 ﻿<!-- 
 // Author: Nikola Machálková
-// Date: 5/12/2022
 -->
 <UserControl x:Class="JustNote.App.Components.NoteTextbox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -12,6 +11,6 @@
              d:DesignHeight="150" d:DesignWidth="200">
     <Grid>
         <TextBox Name="tbNote" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
-                 FontSize="35" TextWrapping="Wrap"></TextBox>
+                 FontSize="35" TextWrapping="Wrap" BorderThickness="0"></TextBox>
     </Grid>
 </UserControl>
