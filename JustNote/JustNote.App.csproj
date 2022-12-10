@@ -8,10 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Graphics\add.png" />
+    <None Remove="Graphics\align.png" />
+    <None Remove="Graphics\bold.png" />
     <None Remove="Graphics\calendar.png" />
+    <None Remove="Graphics\cancel.png" />
     <None Remove="Graphics\close.png" />
+    <None Remove="Graphics\delete.png" />
+    <None Remove="Graphics\italic.png" />
     <None Remove="Graphics\menu.png" />
+    <None Remove="Graphics\open.png" />
+    <None Remove="Graphics\search.png" />
     <None Remove="Graphics\title.png" />
+    <None Remove="Graphics\underline.png" />
+    <None Remove="Graphics\uppercase.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +34,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Graphics\add.png" />
+    <Resource Include="Graphics\align.png" />
+    <Resource Include="Graphics\bold.png" />
     <Resource Include="Graphics\calendar.png" />
+    <Resource Include="Graphics\cancel.png" />
     <Resource Include="Graphics\close.png" />
+    <Resource Include="Graphics\delete.png" />
+    <Resource Include="Graphics\italic.png" />
     <Resource Include="Graphics\menu.png" />
+    <Resource Include="Graphics\open.png" />
+    <Resource Include="Graphics\search.png" />
     <Resource Include="Graphics\title.png" />
+    <Resource Include="Graphics\underline.png" />
+    <Resource Include="Graphics\uppercase.png" />
   </ItemGroup>
 
 </Project>
