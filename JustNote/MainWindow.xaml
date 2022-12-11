@@ -12,6 +12,7 @@
         xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
         xmlns:views="clr-namespace:JustNote.App.Views"
         xmlns:converters="clr-namespace:JustNote.App.Converters"
+		xmlns:component="clr-namespace:JustNote.App.Components"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
@@ -60,7 +61,8 @@
                  Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
         <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
-            <!-- binding Text here-->
+            
+			<!-- binding Text here-->
             <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <ItemsControl.ItemsPanel>
@@ -78,8 +80,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Canvas>
-                            <TextBox Name="tbNote" Text="{Binding Text}" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
-                         FontSize="35" TextWrapping="Wrap" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"></TextBox>
+							<component:NoteTextbox Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
                         </Canvas>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
