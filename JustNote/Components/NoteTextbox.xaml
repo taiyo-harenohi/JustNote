@@ -10,7 +10,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="200">
     <Grid>
-        <TextBox Name="tbNote" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
-                 FontSize="35" TextWrapping="Wrap" BorderThickness="0"></TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- bind deleting button here -->
+        <StackPanel Grid.Row="0" MinHeight="20" Background="#EDDCD2">
+            <Button HorizontalAlignment="Right" MinHeight="20" Height="20" Background="Transparent" BorderThickness="0">
+                <Image Source="../Graphics/close.png"></Image>
+            </Button>
+        </StackPanel>
+        <TextBox Name="tbNote" Grid.Row="1" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
+                 FontSize="35" MinHeight="130" TextWrapping="Wrap" BorderThickness="0"></TextBox>
     </Grid>
 </UserControl>
