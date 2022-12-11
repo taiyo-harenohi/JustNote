@@ -44,13 +44,13 @@
                 <RowDefinition Height="20"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Column="1" Grid.Row="0" Command="{Binding SaveDateDataCommand}"></Button>
+            
             <!-- binding calendar viewmodel here-->
-            <!-- TODO: DELETE THE BINDING TO CALENDAR VIEW LATER and change it to MVVM thing-->
             <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
-
+            
             <!-- binding Date (has two parts: date and time) here -->
             <TextBlock Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="25" Grid.Column="2" Foreground="#A5A58D" Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></TextBlock>
             <!-- binding Title here -->

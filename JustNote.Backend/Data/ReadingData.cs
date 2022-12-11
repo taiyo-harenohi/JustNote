@@ -16,7 +16,7 @@ namespace JustNote.Backend.Data
         public Data Read(string keyword, string date)
         {
             keyword = TrimTitle(keyword);
-            date = TrimText(date);
+            date = TrimDate(date);
 
 
             // if directories doesn't exist yet -> null
@@ -49,7 +49,7 @@ namespace JustNote.Backend.Data
             return data;
         }
 
-        private string TrimText(string date)
+        private string TrimDate(string date)
         {
             return date.Replace(@"/", "_");
         }
