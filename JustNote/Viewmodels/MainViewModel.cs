@@ -34,6 +34,7 @@ namespace JustNote.App.Viewmodels
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
             Mediator.Register("SetDate", SetDate);
+            Mediator.Register("OpenDate", OpenDate);
         }
 
         
@@ -63,6 +64,16 @@ namespace JustNote.App.Viewmodels
             DateTime _date = (DateTime)date;
             Date = _date;
             LoadDateData(Date, null);
+        }
+
+        private void OpenDate(object note)
+        {
+            if (note == null)
+                return;
+            Data _note = (Data)note;
+            Date = _note.Date;
+            Title = _note.Title;
+            LoadDateData(Date, Title);
         }
 
         public ICommand ShowCalendarCommand { get; }

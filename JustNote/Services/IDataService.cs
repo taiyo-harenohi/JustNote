@@ -15,5 +15,7 @@ namespace JustNote.App.Services
         Data GetDateData(DateTime date, string title);
 
         void SaveDateData(Data data);
+
+        List<string> GetFilenamesInDate(DateTime date);
     }
 }

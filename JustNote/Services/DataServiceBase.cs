@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JustNote.Backend.Data;
+using JustNote.Backend;
 
 namespace JustNote.App.Services
 {
@@ -24,13 +25,19 @@ namespace JustNote.App.Services
 
             //var DataOBJ = GetDateDataAsync(date,title);
             var Reader = new ReadingData();
-            return Reader.Read(title, date.ToString("dd/mm/yyyy"));
+            return Reader.Read(title, date.ToString("dd/MM/yyyy"));
         }
 
         public void SaveDateData(Data data)
         {
             var saver = new SavingData();
             saver.Save(data);
+        }
+
+        public List<string> GetFilenamesInDate(DateTime date)
+        {
+            var Reader = new FindingKeyword();
+            return Reader.FindKeyword("json", date.ToString("dd/MM/yyyy"));
         }
 
         //protected abstract Data GetDateDataAsync(DateTime date, string title);

@@ -26,9 +26,15 @@ namespace JustNote.App.Viewmodels
             SelectedDate = NewDate;
             _dataService = dataService;
             HideCalendarCommand = new RelayCommand(HideCalendar);
+            LoadFilenamesCommand = new RelayCommand(LoadFilenamesInDate);
+            OpenNoteCommand = new RelayCommand<string>(_string => OpenNote(_string));
         }
 
         public ICommand HideCalendarCommand { get; }
+
+        public ICommand LoadFilenamesCommand { get; }
+
+        public ICommand OpenNoteCommand { get; }
 
         public DateTime SelectedDate
         {
@@ -37,18 +43,49 @@ namespace JustNote.App.Viewmodels
             {
                 _selectedDate = value;
                 SendDateToMain(_selectedDate);
+                LoadFilenamesInDate();
                 OnPropertyChanged();
             }
         }
 
+        public ObservableCollection<string> Files { get; set; } = new();
+
         private void SendDateToMain(DateTime date)
         {
             Mediator.Send("SetDate", date);
-
         }
         private void HideCalendar()
         {
             CalendarViewVisible = false;
+        }
+
+        private void LoadFilenamesInDate()
+        {
+            if(_dataService != null)
+            {
+                var filenames = _dataService.GetFilenamesInDate(SelectedDate);
+                Files.Clear();
+                if (filenames != null)
+                {
+                    foreach (var name in filenames)
+                    {
+                        string[] tmp = {name,"0" };
+                        Files.Add(name);
+                    }
+                }
+            }
+        }
+
+        private void OpenNote(string title)
+        {
+            if(title != null)
+            {
+                Data date_to_open = new();
+                date_to_open.Date = SelectedDate;
+                date_to_open.Title = title;
+                HideCalendar();
+                Mediator.Send("OpenDate", date_to_open);
+            }
         }
 
         public bool CalendarViewVisible
@@ -57,6 +94,7 @@ namespace JustNote.App.Viewmodels
             set
             {
                 _calendarViewVisible = value;
+                LoadFilenamesInDate();
                 OnPropertyChanged();
             }
         }
