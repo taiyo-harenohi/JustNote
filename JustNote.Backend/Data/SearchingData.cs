@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,13 @@ namespace JustNote.Backend.Data
                 return null;
             }
 
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + TrimDate(date) + "/";
             if (!Directory.Exists(filepathDirectory))
             {
                 return null;
             }
+
+
 
             string[] files = Directory.GetFiles(filepathDirectory);
 

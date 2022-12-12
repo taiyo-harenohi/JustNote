@@ -169,6 +169,7 @@ namespace JustNote.App.Viewmodels
 
         private void SaveDateData()
         {
+            Debug.WriteLine("saving");
             DateData.Date = Date;
             DateData.Title = Title;
             if (DateData.Notes == null)
@@ -179,7 +180,6 @@ namespace JustNote.App.Viewmodels
                 DateData.Notes.Add(note);
             }
             _dataService.SaveDateData(DateData);
-            
         }
 
     }

@@ -62,14 +62,13 @@
                 <TextBlock
                        FontSize="25"
                        Foreground="#A5A58D"
-                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:dd/MM/yyyy}}">
+                       Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" >
 
                 </TextBlock>
                 <TextBlock 
                        FontSize="25"
                        Foreground="#A5A58D"
                        Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}">
-
                 </TextBlock>
             </StackPanel>
 
@@ -84,6 +83,7 @@
                      MaxLines="1"
                      BorderThickness="0"
                      Background="#FFF1E6"
+                     Text="{Binding Title}"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Stretch">
             </TextBox>
@@ -106,7 +106,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
-                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Input}"/>
+                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Text}"/>
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

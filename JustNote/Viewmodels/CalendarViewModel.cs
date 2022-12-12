@@ -13,6 +13,8 @@ using System.Windows.Input;
 using JustNote.App.Services;
 using JustNote.Backend.Data;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Diagnostics;
+
 namespace JustNote.App.Viewmodels
 {
     public class CalendarViewModel : INotifyPropertyChanged
