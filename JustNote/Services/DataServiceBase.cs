@@ -36,8 +36,15 @@ namespace JustNote.App.Services
 
         public List<string> GetFilenamesInDate(DateTime date)
         {
+            var Reader = new SearchingData();
+            return Reader.SearchData(date.ToString("dd/MM/yyyy"));
+        }
+
+        // Author: Nikola Machálková
+        public List<string> GetFilenamesKeyword(string keyword, DateTime date)
+        {
             var Reader = new FindingKeyword();
-            return Reader.FindKeyword("json", date.ToString("dd/MM/yyyy"));
+            return Reader.FindKeyword(keyword, date.ToString("dd/MM/yyyy"));
         }
 
         //protected abstract Data GetDateDataAsync(DateTime date, string title);

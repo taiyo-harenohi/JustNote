@@ -13,6 +13,8 @@ using System.Windows.Input;
 using JustNote.App.Services;
 using JustNote.Backend.Data;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Diagnostics;
+
 namespace JustNote.App.Viewmodels
 {
     public class CalendarViewModel : INotifyPropertyChanged
@@ -84,6 +86,7 @@ namespace JustNote.App.Viewmodels
                 date_to_open.Date = SelectedDate;
                 date_to_open.Title = title;
                 HideCalendar();
+                Debug.WriteLine(title);
                 Mediator.Send("OpenDate", date_to_open);
             }
         }
