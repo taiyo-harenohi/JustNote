@@ -33,18 +33,19 @@ namespace JustNote.App.Components
 
             Loaded += NoteTextbox_Loaded;
 
-
+            // subscribing to events
             this.MouseLeftButtonDown += new MouseButtonEventHandler(Control_MouseLeftButtonDown);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(Control_MouseLeftButtonUp);
             this.MouseMove += new MouseEventHandler(Control_MouseMove);
         }
 
+        // for sizeable note
         private void NoteTextbox_Loaded(object sender, RoutedEventArgs e)
         {
             AdornerLayer.GetAdornerLayer(NoteGrid).Add(new ResizeNote(NoteGrid));
         }
 
-
+        // mouse controls for draggable events
         private void Control_MouseLeftButtonDown(Object sender, MouseButtonEventArgs e)
         {
             isDragging = true;
@@ -72,6 +73,7 @@ namespace JustNote.App.Components
                 prevY = transform.Y;
             }
             draggable.ReleaseMouseCapture();
+            // so the thumb moves too
             AdornerLayer.GetAdornerLayer(NoteGrid).Add(new ResizeNote(NoteGrid));
         }
 
