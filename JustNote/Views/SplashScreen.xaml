@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JustNote.App.Views"
         mc:Ignorable="d"
-        ResizeMode="NoResize" WindowStyle="None" Background="WhiteSmoke" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" WindowStyle="None" Background="#FFF1E6" WindowStartupLocation="CenterScreen"
         Title="SplashScreen" Height="450" Width="800">
-    <StackPanel VerticalAlignment="Center">
+    <StackPanel VerticalAlignment="Center" >
         <WrapPanel HorizontalAlignment="Center">
             <Image Source="/Graphics/title.png" Height="220"/>
         </WrapPanel>
