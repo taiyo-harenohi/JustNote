@@ -22,7 +22,7 @@ namespace JustNote.App.Components
         {
             AdornerVisual = new VisualCollection(this);
 
-            thumb = new Thumb() { Background = Brushes.Brown, Height = 10, Width = 10};
+            thumb = new Thumb() { Background = Brushes.RosyBrown, Height = 10, Width = 10};
 
             thumb.DragDelta += thumb_DragDelta;
 
@@ -36,8 +36,6 @@ namespace JustNote.App.Components
 
             ele.Height = ele.ActualHeight + e.VerticalChange < 0 ? 0 : ele.ActualHeight + e.VerticalChange;
             ele.Width = ele.ActualWidth + e.HorizontalChange < 0 ? 0 : ele.ActualWidth + e.HorizontalChange;
-
-            Debug.WriteLine(ele.Height);
         }
 
 
@@ -51,9 +49,7 @@ namespace JustNote.App.Components
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            thumb.Arrange(new Rect(AdornedElement.DesiredSize.Width,AdornedElement.DesiredSize.Height,10,10));
-
-
+            thumb.Arrange(new Rect(AdornedElement.DesiredSize.Width - 5,AdornedElement.DesiredSize.Height - 5,10,10));
 
             return base.ArrangeOverride(finalSize);
         }

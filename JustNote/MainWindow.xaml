@@ -52,7 +52,7 @@
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
             <!-- binding Date (has two parts: date and time) here 
-            //Otevrel
+            //Author: Jaromír Otevřel
             -->
             <StackPanel Grid.Row="1"
                         Grid.Column="2"
@@ -86,9 +86,7 @@
                      Text="{}"
                      Background="#FFF1E6"
                      HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Stretch"
-                     >
-                
+                     VerticalContentAlignment="Stretch">
             </TextBox>
         <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
