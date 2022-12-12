@@ -127,9 +127,6 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        
-
-
         private void ShowCalendar()
         {
             CalendarViewModel.CalendarViewVisible = true;
