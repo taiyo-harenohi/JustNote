@@ -14,36 +14,26 @@ namespace JustNote.App.Components
     public class ResizeNote : Adorner
     {
         VisualCollection AdornerVisual;
-        Thumb thumb1, thumb2;
+        Thumb thumb;
 
         public ResizeNote(UIElement adornedElement) : base(adornedElement)
         {
             AdornerVisual = new VisualCollection(this);
 
-            thumb1 = new Thumb() { Background = Brushes.Brown, Height = 10, Width = 10};
-            thumb2 = new Thumb() { Background = Brushes.Brown, Height = 10, Width = 10};
+            thumb = new Thumb() { Background = Brushes.Brown, Height = 10, Width = 10};
 
-            thumb1.DragDelta += thumb1_DragDelta;
-            thumb2.DragDelta += thumb2_DragDelta;
+            thumb.DragDelta += thumb_DragDelta;
 
-            AdornerVisual.Add(thumb1);
-            AdornerVisual.Add(thumb2);
+            AdornerVisual.Add(thumb);
         }
 
-        private void thumb1_DragDelta(object sender, DragDeltaEventArgs e)
+
+        private void thumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
             var ele = (FrameworkElement)AdornedElement;
 
-           // ele.Height = ele.Height - e.VerticalChange < 0 ? 0: ele.Height - e.VerticalChange;
-           // ele.Width = ele.Width - e.HorizontalChange < 0 ? 0: ele.Width - e.HorizontalChange;
-        }
-
-        private void thumb2_DragDelta(object sender, DragDeltaEventArgs e)
-        {
-            var ele = (FrameworkElement)AdornedElement;
-
-            ele.Height = ele.Height + e.VerticalChange < 0 ? 0 : ele.Height + e.VerticalChange;
-            ele.Width = ele.Width + e.HorizontalChange < 0 ? 0 : ele.Width + e.HorizontalChange;
+            ele.Height = ele.ActualHeight + e.VerticalChange < 0 ? 0 : ele.ActualHeight + e.VerticalChange;
+            ele.Width = ele.ActualWidth + e.HorizontalChange < 0 ? 0 : ele.ActualWidth + e.HorizontalChange;
 
             Debug.WriteLine(ele.Height);
         }
@@ -59,8 +49,7 @@ namespace JustNote.App.Components
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            thumb1.Arrange(new Rect(0,0,10,10));
-            thumb2.Arrange(new Rect(AdornedElement.DesiredSize.Width,AdornedElement.DesiredSize.Height,10,10));
+            thumb.Arrange(new Rect(AdornedElement.DesiredSize.Width,AdornedElement.DesiredSize.Height,10,10));
 
 
 

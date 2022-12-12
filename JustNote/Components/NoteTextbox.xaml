@@ -7,22 +7,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JustNote.App.Components"
-             mc:Ignorable="d" >
-    <Grid Name="NoteGrid" Width="200" Height="150" MinWidth="200" MinHeight="150">
+             mc:Ignorable="d">
+    <Grid Name="NoteGrid" MinHeight="120" MinWidth="150">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         
         <!-- bind deleting button here -->
-        <StackPanel Grid.Row="0" MinHeight="20" Background="#EDDCD2">
+        <StackPanel Grid.Row="0" MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Button Name="btnCancel" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
                 <Image Height="20" Source="../Graphics/close.png"></Image>
             </Button>
         </StackPanel>
-        <DockPanel Grid.Row="1">
+        <DockPanel Name="dockpanel" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
-                 FontSize="35" MinHeight="130" TextWrapping="Wrap" BorderThickness="0"></TextBox>
+                 FontSize="35" MinHeight="130" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Auto"></TextBox>
         </DockPanel>
     </Grid>
 </UserControl>
