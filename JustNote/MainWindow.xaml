@@ -62,8 +62,8 @@
                 <TextBlock
                        FontSize="25"
                        Foreground="#A5A58D"
-                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:dd/MM/yyyy}}">
-
+                       Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}">
+                        <!--Binding to date-->
                 </TextBlock>
                 <TextBlock 
                        FontSize="25"
@@ -83,7 +83,7 @@
                      VerticalAlignment="Stretch"
                      MaxLines="1"
                      BorderThickness="0"
-                     Text="{}"
+                     Text="{Binding Title}"
                      Background="#FFF1E6"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Stretch">
