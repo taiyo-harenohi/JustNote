@@ -12,6 +12,7 @@
         xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
         xmlns:views="clr-namespace:JustNote.App.Views"
         xmlns:converters="clr-namespace:JustNote.App.Converters"
+		xmlns:component="clr-namespace:JustNote.App.Components"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
@@ -25,7 +26,7 @@
                                  CommandParameter="{Binding Source={x:Static sys:DateTime.Today}}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Grid>
+    <Grid Name="grid">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"></ColumnDefinition>
@@ -50,40 +51,72 @@
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
-            
-            <!-- binding Date (has two parts: date and time) here -->
-            <TextBlock Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="25" Grid.Column="2" Foreground="#A5A58D" Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></TextBlock>
+            <!-- binding Date (has two parts: date and time) here 
+            //Otevrel
+            -->
+            <StackPanel Grid.Row="1"
+                        Grid.Column="2"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        >
+                <TextBlock
+                       FontSize="25"
+                       Foreground="#A5A58D"
+                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:dd/MM/yyyy}}">
+
+                </TextBlock>
+                <TextBlock 
+                       FontSize="25"
+                       Foreground="#A5A58D"
+                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}">
+
+                </TextBlock>
+            </StackPanel>
+
             <!-- binding Title here -->
-            <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
-                 Text="{Binding Title}"
-                 Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
+            <TextBox Name="tbTitle"
+                     Grid.Column="3"
+                     Grid.Row="1"
+                     Foreground="#A5A58D"
+                     FontSize="65" 
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     MaxLines="1"
+                     BorderThickness="0"
+                     Text="{}"
+                     Background="#FFF1E6"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Stretch"
+                     >
+                
+            </TextBox>
         <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
-            <!-- binding Text here-->
+            
+			<!-- binding Text here-->
             <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas Name="DateCanvas"  Background="#FFF1E6">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="MouseLeftButtonDown">
-                                    <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Name="DateCanvas"  Background="#FFF1E6">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                                        <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
                                      CommandParameter="{Binding ElementName=DateCanvas}" />
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Canvas>
-                            <TextBox Name="tbNote" Text="{Binding Text}" Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" 
-                         FontSize="35" TextWrapping="Wrap" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"></TextBox>
-                        </Canvas>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Canvas>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Canvas>
+                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            
 
 
             <!-- binding settings viewmodel here-->
