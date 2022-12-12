@@ -8,12 +8,11 @@
         ResizeMode="NoResize" WindowStyle="None" Background="#FFF1E6" WindowStartupLocation="CenterScreen"
         Title="SplashScreen" Height="450" Width="800">
     <StackPanel VerticalAlignment="Center" >
-        <WrapPanel HorizontalAlignment="Center">
+        <WrapPanel HorizontalAlignment="Center" Margin="40,0,0,0">
             <Image Source="/Graphics/title.png" Height="220"/>
         </WrapPanel>
-        <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="25" >
-           <Bold> JustNote is loading</Bold><LineBreak></LineBreak>
-            Please wait a minute.
+        <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="25" Text="JustNote is loading..."
+                    Foreground="#C69D7B">
         </TextBlock>
     </StackPanel>
 </Window>
