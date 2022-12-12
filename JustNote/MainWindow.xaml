@@ -94,32 +94,29 @@
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
             
 			<!-- binding Text here-->
-      <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto" 
-            <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas Name="DateCanvas"  Background="#FFF1E6">
-                                    <b:Interaction.Triggers>
-                                        <b:EventTrigger EventName="MouseLeftButtonDown">
-                                            <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
+            <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto" >
+                <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Name="DateCanvas"  Background="#FFF1E6">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                                        <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
                                      CommandParameter="{Binding ElementName=DateCanvas}" />
-                                        </b:EventTrigger>
-                                    </b:Interaction.Triggers>
-                                </Canvas>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Canvas>
-                                    <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
-                                </Canvas>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Canvas>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Canvas>
+                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 </ScrollViewer>
-            </Grid>
 
             <!-- binding settings viewmodel here-->
             <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
