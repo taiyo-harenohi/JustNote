@@ -94,7 +94,8 @@
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
             
 			<!-- binding Text here-->
-            <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto" >
+            <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto"
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -120,12 +121,13 @@
 
             <!-- binding settings viewmodel here-->
             <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
-                Background="Transparent" BorderThickness="0">
+                Background="Transparent" BorderThickness="0" Command="{Binding ShowSettingCommand}">
                 <Image Source="Graphics/menu.png"></Image>
             </Button>
         </Grid>
-       
-        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding CalendarViewModel}" Width="348" HorizontalAlignment="Left"/>
+
+        <views:ViewSetting  Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding SettingViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding SettingViewModel}" Width="300" HorizontalAlignment="Right"></views:ViewSetting>
+        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding CalendarViewModel}" Width="350" HorizontalAlignment="Left"/>
         
     </Grid>
 </Window>

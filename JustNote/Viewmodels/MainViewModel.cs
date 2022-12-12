@@ -20,6 +20,7 @@ namespace JustNote.App.Viewmodels
     {
         private IDataService _dataService;
         private CalendarViewModel _calendarViewModel;
+        private SettingViewModel _settingViewModel;
         private Data _data;
         private DateTime _Date;
         private string _Title;
@@ -31,8 +32,10 @@ namespace JustNote.App.Viewmodels
             FetchDateData = new RelayCommand<DateTime>( date => LoadDateData(date, null));
             CanvasLClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
+            ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
+            SettingViewModel = new SettingViewModel(dataService);
             Mediator.Register("SetDate", SetDate);
             Mediator.Register("OpenDate", OpenDate);
         }
@@ -45,6 +48,16 @@ namespace JustNote.App.Viewmodels
             set
             {
                 _calendarViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SettingViewModel SettingViewModel
+        {
+            get { return _settingViewModel; }
+            set
+            {
+                _settingViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -77,6 +90,7 @@ namespace JustNote.App.Viewmodels
         }
 
         public ICommand ShowCalendarCommand { get; }
+        public ICommand ShowSettingCommand { get; }
         public ICommand FetchDateData { get; }
         
         public ICommand SaveDateDataCommand { get; }
@@ -130,6 +144,11 @@ namespace JustNote.App.Viewmodels
         private void ShowCalendar()
         {
             CalendarViewModel.CalendarViewVisible = true;
+        }
+
+        private void ShowSetting()
+        {
+            SettingViewModel.SettingViewVisible = true;
         }
 
         private void LoadDateData(DateTime date, string title)
