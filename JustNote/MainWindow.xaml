@@ -51,19 +51,51 @@
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
-            
-            <!-- binding Date (has two parts: date and time) here -->
-            <TextBlock Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="25" Grid.Column="2" Foreground="#A5A58D" Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></TextBlock>
+            <!-- binding Date (has two parts: date and time) here 
+            //Otevrel
+            -->
+            <StackPanel Grid.Row="1"
+                        Grid.Column="2"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        >
+                <TextBlock
+                       FontSize="25"
+                       Foreground="#A5A58D"
+                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:dd/MM/yyyy}}">
+
+                </TextBlock>
+                <TextBlock 
+                       FontSize="25"
+                       Foreground="#A5A58D"
+                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}">
+
+                </TextBlock>
+            </StackPanel>
+
             <!-- binding Title here -->
-            <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
-                 Text="{Binding Title}"
-                 Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
-            <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
-                  VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
-            <Grid Name="gridNote" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5">
-                <!-- binding Text here-->
-                <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto" 
+            <TextBox Name="tbTitle"
+                     Grid.Column="3"
+                     Grid.Row="1"
+                     Foreground="#A5A58D"
+                     FontSize="65" 
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     MaxLines="1"
+                     BorderThickness="0"
+                     Text="{}"
+                     Background="#FFF1E6"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Stretch"
+                     >
+                
+            </TextBox>
+        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
+              VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
+            
+			<!-- binding Text here-->
+      <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto" 
+            <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <ItemsControl.ItemsPanel>
@@ -88,7 +120,6 @@
                     </ItemsControl>
                 </ScrollViewer>
             </Grid>
-
 
             <!-- binding settings viewmodel here-->
             <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
