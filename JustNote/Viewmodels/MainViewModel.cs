@@ -30,7 +30,9 @@ namespace JustNote.App.Viewmodels
         {
             _dataService = dataService;
             FetchDateData = new RelayCommand<DateTime>( date => LoadDateData(date, null));
-            CanvasLClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
+            //CanvasLClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
+            //TODO / null is not correct
+            CanvasLDoubleClick = new RelayCommand<System.Windows.IInputElement>(Canvas => CreateTextbox(Canvas, null));
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
@@ -94,19 +96,24 @@ namespace JustNote.App.Viewmodels
         public ICommand FetchDateData { get; }
         
         public ICommand SaveDateDataCommand { get; }
-        public ICommand CanvasLClick { get; }
+        //public ICommand CanvasLClick { get;}
+        public ICommand CanvasLDoubleClick { get;}
 
-        private void CreateTextbox(System.Windows.IInputElement DateCanvas)
+
+        private void CreateTextbox(System.Windows.IInputElement DateCanvas, MouseButtonEventArgs e)
         {
-            if (Mouse.DirectlyOver != DateCanvas)
-                return;
-            if (DateCanvas == null)
-                return;
-            var mouseX = Mouse.GetPosition(DateCanvas).X;
-            var mouseY = Mouse.GetPosition(DateCanvas).Y;
-            int[] mouseCoord = { (int)mouseX, (int)mouseY };
-            var note = new Note(1, "TEST TEXT", mouseCoord);
-            Notes.Add(note);
+            if (e.ClickCount == 2)
+            {
+                if (Mouse.DirectlyOver != DateCanvas)
+                    return;
+                if (DateCanvas == null)
+                    return;
+                var mouseX = Mouse.GetPosition(DateCanvas).X;
+                var mouseY = Mouse.GetPosition(DateCanvas).Y;
+                int[] mouseCoord = { (int)mouseX, (int)mouseY };
+                var note = new Note(1, "TEST TEXT", mouseCoord);
+                Notes.Add(note);
+            }
         }
 
         public ObservableCollection<Note> Notes { get; set; } = new();

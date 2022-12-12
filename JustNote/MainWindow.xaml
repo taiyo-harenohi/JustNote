@@ -100,8 +100,9 @@
                             <Canvas Name="DateCanvas"  Background="#FFF1E6">
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="MouseLeftButtonDown">
-                                        <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
-                                     CommandParameter="{Binding ElementName=DateCanvas}" />
+                                        <b:InvokeCommandAction Command="{Binding CanvasLDoubleClick}"
+                                                               PassEventArgsToCommand="True"
+                                                               CommandParameter="{Binding ElementName=DateCanvas}" />
                                     </b:EventTrigger>
                                 </b:Interaction.Triggers>
                             </Canvas>
