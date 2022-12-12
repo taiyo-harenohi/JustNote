@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JustNote.App.Views"
+             xmlns:views="clr-namespace:JustNote.App.Views"
              xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"             
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance {x:Type viewModels:SettingViewModel}}"
@@ -29,6 +30,8 @@
             <Image Source="../Graphics/close.png" Height="70" MinHeight="70" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
         </Button>
         <!-- bind view "ViewTextSettings" here -->
+        <views:ViewTextSettings Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2" DataContext="{Binding TextSettingsViewModel}"></views:ViewTextSettings>
         <!-- bind view "ViewExport" here -->
+        <views:ViewExport Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2" DataContext="{Binding ExportViewModel}"></views:ViewExport>
     </Grid>
 </UserControl>
