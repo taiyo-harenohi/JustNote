@@ -18,6 +18,7 @@
     <None Remove="Graphics\italic.png" />
     <None Remove="Graphics\menu.png" />
     <None Remove="Graphics\open.png" />
+    <None Remove="Graphics\save1.png" />
     <None Remove="Graphics\search.png" />
     <None Remove="Graphics\title.png" />
     <None Remove="Graphics\underline.png" />
@@ -49,6 +50,7 @@
     <Resource Include="Graphics\italic.png" />
     <Resource Include="Graphics\menu.png" />
     <Resource Include="Graphics\open.png" />
+    <Resource Include="Graphics\save1.png" />
     <Resource Include="Graphics\search.png" />
     <Resource Include="Graphics\title.png" />
     <Resource Include="Graphics\underline.png" />

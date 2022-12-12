@@ -71,9 +71,9 @@
                                 <ColumnDefinition Width="60*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <!-- bind title of note here-->
-                            <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="10" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="20" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                             <!-- bind date of note here-->
-                            <Label Grid.Column="1" Foreground="#957D60" FontSize="10" FontStretch="Expanded" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                            <Label Grid.Column="1" Foreground="#957D60" FontSize="20" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
                         </Grid>
                     </Button>
                 </DataTemplate>
@@ -87,7 +87,7 @@
                 <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!-- keyword input-->
-            <TextBox Grid.Column="0" BorderBrush="#B7B7A4" BorderThickness="3" FontStretch="Expanded" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#A5A58D" Foreground="#957D60"></TextBox>
+            <TextBox Grid.Column="0" BorderBrush="#B7B7A4" BorderThickness="3" FontStretch="Expanded" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#A5A58D" Foreground="#FFF1E6"></TextBox>
             <!-- bind button for opening window ViewFoundKeyword with found notes with keyword in title -->
             <Button Grid.Column="1" BorderThickness="0" Background="Transparent" MinHeight="30">
                 <Image Source="../Graphics/search.png" Height="30" MinHeight="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>

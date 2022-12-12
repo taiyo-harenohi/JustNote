@@ -44,8 +44,15 @@
                 <RowDefinition Height="35*"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Column="1" Grid.Row="0" Command="{Binding SaveDateDataCommand}"></Button>
-            
+
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Button HorizontalAlignment="Left" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0" Command="{Binding SaveDateDataCommand}">
+                    <Image Source="../Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
+                </Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0">
+                    <Image Source="../Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
+                </Button>
+            </Grid>
             <!-- binding calendar viewmodel here-->
             <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
@@ -62,14 +69,13 @@
                 <TextBlock
                        FontSize="25"
                        Foreground="#A5A58D"
-                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:dd/MM/yyyy}}">
+                       Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" >
 
                 </TextBlock>
                 <TextBlock 
                        FontSize="25"
                        Foreground="#A5A58D"
                        Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}">
-
                 </TextBlock>
             </StackPanel>
 
@@ -83,8 +89,8 @@
                      VerticalAlignment="Stretch"
                      MaxLines="1"
                      BorderThickness="0"
-                     Text="{}"
                      Background="#FFF1E6"
+                     Text="{Binding Title}"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Stretch">
             </TextBox>
@@ -93,25 +99,21 @@
             
 			<!-- binding Text here-->
             <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto"
-                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
                 <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas Name="DateCanvas"  Background="#FFF1E6">
-                                <b:Interaction.Triggers>
-                                    <b:EventTrigger EventName="MouseLeftButtonDown">
-                                        <b:InvokeCommandAction Command="{Binding CanvasLDoubleClick}"
-                                                               PassEventArgsToCommand="True"
-                                                               CommandParameter="{Binding ElementName=DateCanvas}" />
-                                    </b:EventTrigger>
-                                </b:Interaction.Triggers>
+                                <Canvas.InputBindings>
+                                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CanvasLClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
+                                </Canvas.InputBindings>
                             </Canvas>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
-                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
+                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Text}"/>
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

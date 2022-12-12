@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace JustNote.Backend.Data
                 return null;
             }
 
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + TrimDate(date) + "/";
             if (!Directory.Exists(filepathDirectory))
             {
                 return null;
@@ -26,13 +27,12 @@ namespace JustNote.Backend.Data
 
             string[] files = Directory.GetFiles(filepathDirectory);
 
-            for (int i = 0; i < files.Length - 1; i++)
+            for (int i = 0; i < files.Length; i++)
             {
                 files[i] = Path.GetFileName(files[i]);
                 files[i] = files[i].Replace(".json", "");
             }
             results = files.ToList();
-
 
             return results;
         }

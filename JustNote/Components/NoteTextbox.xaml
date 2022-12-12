@@ -22,8 +22,7 @@
                 </Button>
             </StackPanel>
         </Border>
-        
-        
+
         <DockPanel Name="dockpanel" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox Background="#EDDCD2" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  FontSize="35" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
