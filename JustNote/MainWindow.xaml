@@ -60,18 +60,15 @@
                 <TextBlock
                        FontSize="25"
                        Foreground="#A5A58D"
-                       Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}">
+                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:dd/MM/yyyy}}">
 
                 </TextBlock>
                 <TextBlock 
-                       VerticalAlignment="Bottom"
-                       HorizontalAlignment="Center"
                        FontSize="25"
                        Foreground="#A5A58D"
                        Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}">
-                
 
-            </TextBlock>
+                </TextBlock>
             </StackPanel>
 
             <!-- binding Title here -->
@@ -84,7 +81,7 @@
                      VerticalAlignment="Stretch"
                      MaxLines="1"
                      BorderThickness="0"
-                     Text="{Binding Title}"
+                     Text="{}"
                      Background="#FFF1E6"
                      HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Stretch"
@@ -117,7 +114,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </Grid>
+            
 
 
             <!-- binding settings viewmodel here-->
