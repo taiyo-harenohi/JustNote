@@ -23,6 +23,13 @@ namespace JustNote.App.Components
         public NoteTextbox()
         {
             InitializeComponent();
+
+            Loaded += NoteTextbox_Loaded;
+        }
+
+        private void NoteTextbox_Loaded(object sender, RoutedEventArgs e)
+        {
+            //AdornerLayer.GetAdornerLayer(NoteGrid).Add(new ResizeNote(NoteGrid));
         }
     }
 }
