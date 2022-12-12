@@ -26,7 +26,7 @@
                                  CommandParameter="{Binding Source={x:Static sys:DateTime.Today}}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Grid>
+    <Grid Name="grid">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"></ColumnDefinition>
@@ -75,48 +75,37 @@
             </StackPanel>
 
             <!-- binding Title here -->
-            <TextBox Name="tbTitle"
-                     Grid.Column="3"
-                     Grid.Row="1"
-                     Foreground="#A5A58D"
-                     FontSize="65" 
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     MaxLines="1"
-                     BorderThickness="0"
-                     Text="{Binding Title}"
-                     Background="#FFF1E6"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Stretch"
-                     >
-                
-            </TextBox>
-        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
-              VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
-            
-			<!-- binding Text here-->
-            <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
+            <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
+                 Text="{Binding Title}"
+                 Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
+            <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
+                  VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
+            <Grid Name="gridNote" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5">
+                <!-- binding Text here-->
+                <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas Name="DateCanvas"  Background="#FFF1E6">
-                            <b:Interaction.Triggers>
-                                <b:EventTrigger EventName="MouseLeftButtonDown">
-                                    <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Name="DateCanvas"  Background="#FFF1E6">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                                        <b:InvokeCommandAction Command="{Binding CanvasLClick}" PassEventArgsToCommand="True"
                                      CommandParameter="{Binding ElementName=DateCanvas}" />
-                                </b:EventTrigger>
-                            </b:Interaction.Triggers>
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Canvas>
-							<component:NoteTextbox Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
-                        </Canvas>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Canvas>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Canvas>
+                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}"/>
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
 
 
             <!-- binding settings viewmodel here-->
