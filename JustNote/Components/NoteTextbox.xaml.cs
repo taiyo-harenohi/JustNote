@@ -29,7 +29,7 @@ namespace JustNote.App.Components
 
         private void NoteTextbox_Loaded(object sender, RoutedEventArgs e)
         {
-            //AdornerLayer.GetAdornerLayer(NoteGrid).Add(new ResizeNote(NoteGrid));
+            AdornerLayer.GetAdornerLayer(NoteGrid).Add(new ResizeNote(NoteGrid));
         }
     }
 }
