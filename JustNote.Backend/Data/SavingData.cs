@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace JustNote.Backend.Data
 {
@@ -16,7 +17,7 @@ namespace JustNote.Backend.Data
         public void Save(Data data)
         {
             string trimmedDate = TrimDate(data.Date.ToString("dd/MM/yyyy"));
-
+            
             // if directories doesn't exist yet -> create them
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"/.data/"))
             {
@@ -31,6 +32,7 @@ namespace JustNote.Backend.Data
 
 
             string filename = TrimTitle(data.Title + ".json");
+
 
             using (StreamWriter sw = new StreamWriter(filepathDirectory + filename))
             {

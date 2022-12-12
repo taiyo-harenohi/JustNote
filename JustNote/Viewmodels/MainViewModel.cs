@@ -13,6 +13,7 @@ using System.Windows.Input;
 using JustNote.App.Services;
 using JustNote.Backend.Data;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Diagnostics;
 
 namespace JustNote.App.Viewmodels
 {
@@ -24,7 +25,6 @@ namespace JustNote.App.Viewmodels
         private Data _data;
         private DateTime _Date;
         private string _Title;
-      
 
         public MainViewModel(IDataService dataService)
         {
@@ -94,7 +94,7 @@ namespace JustNote.App.Viewmodels
         public ICommand FetchDateData { get; }
         
         public ICommand SaveDateDataCommand { get; }
-        public ICommand CanvasLClick { get; }
+        public ICommand CanvasLClick { get; private set; }
 
         private void CreateTextbox(System.Windows.IInputElement DateCanvas)
         {
@@ -105,7 +105,8 @@ namespace JustNote.App.Viewmodels
             var mouseX = Mouse.GetPosition(DateCanvas).X;
             var mouseY = Mouse.GetPosition(DateCanvas).Y;
             int[] mouseCoord = { (int)mouseX, (int)mouseY };
-            var note = new Note(1, "TEST TEXT", mouseCoord);
+            string input = "Test Text";
+            var note = new Note(1, input, mouseCoord);
             Notes.Add(note);
         }
 
@@ -168,6 +169,7 @@ namespace JustNote.App.Viewmodels
 
         private void SaveDateData()
         {
+            Debug.WriteLine("saving");
             DateData.Date = Date;
             DateData.Title = Title;
             if (DateData.Notes == null)
@@ -178,7 +180,6 @@ namespace JustNote.App.Viewmodels
                 DateData.Notes.Add(note);
             }
             _dataService.SaveDateData(DateData);
-            
         }
 
     }

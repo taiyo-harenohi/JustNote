@@ -1,5 +1,5 @@
 ﻿
-// Authors: Nikola Machálková (basic layout and commands) & Lukáš Leták (--doplň--)
+// Authors: Nikola Machálková (basic layout and commands)
 
 using System;
 using System.Collections.Generic;
