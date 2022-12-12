@@ -33,6 +33,7 @@ namespace JustNote.Backend.Data
 
             string filename = TrimTitle(data.Title + ".json");
 
+
             using (StreamWriter sw = new StreamWriter(filepathDirectory + filename))
             {
                 sw.WriteLine(JsonSerializer.Serialize(data));

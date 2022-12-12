@@ -86,6 +86,7 @@ namespace JustNote.App.Viewmodels
                 date_to_open.Date = SelectedDate;
                 date_to_open.Title = title;
                 HideCalendar();
+                Debug.WriteLine(title);
                 Mediator.Send("OpenDate", date_to_open);
             }
         }

@@ -25,17 +25,14 @@ namespace JustNote.Backend.Data
                 return null;
             }
 
-
-
             string[] files = Directory.GetFiles(filepathDirectory);
 
-            for (int i = 0; i < files.Length - 1; i++)
+            for (int i = 0; i < files.Length; i++)
             {
                 files[i] = Path.GetFileName(files[i]);
                 files[i] = files[i].Replace(".json", "");
             }
             results = files.ToList();
-
 
             return results;
         }
