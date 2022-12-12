@@ -70,7 +70,6 @@
                        FontSize="25"
                        Foreground="#A5A58D"
                        Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" >
-
                 </TextBlock>
                 <TextBlock 
                        FontSize="25"

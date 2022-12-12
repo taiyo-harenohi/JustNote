@@ -25,17 +25,22 @@ namespace JustNote.App.Viewmodels
         private Data _data;
         private DateTime _Date;
         private string _Title;
+        private int _noteID;
+     
 
         public MainViewModel(IDataService dataService)
         {
             _dataService = dataService;
+            _noteID = 0;
             FetchDateData = new RelayCommand<DateTime>( date => LoadDateData(date, null));
             CanvasLClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
+            NoteRemoveCommand = new RelayCommand<int>(key => RemoveTextbox(key));
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
             SettingViewModel = new SettingViewModel(dataService);
+            
             Mediator.Register("SetDate", SetDate);
             Mediator.Register("OpenDate", OpenDate);
         }
@@ -92,7 +97,10 @@ namespace JustNote.App.Viewmodels
         public ICommand ShowCalendarCommand { get; }
         public ICommand ShowSettingCommand { get; }
         public ICommand FetchDateData { get; }
-        
+
+        public ICommand NoteRemoveCommand { get; }
+
+
         public ICommand SaveDateDataCommand { get; }
         public ICommand CanvasLClick { get; private set; }
 
@@ -106,8 +114,21 @@ namespace JustNote.App.Viewmodels
             var mouseY = Mouse.GetPosition(DateCanvas).Y;
             int[] mouseCoord = { (int)mouseX, (int)mouseY };
             string input = "Test Text";
-            var note = new Note(1, input, mouseCoord);
+            var note = new Note(_noteID, input, mouseCoord);
             Notes.Add(note);
+            _noteID++;
+        }
+
+        private void RemoveTextbox(int key)
+        {
+            foreach (var note in Notes)
+            {
+                if (note.Key == key)
+                {
+                    Notes.Remove(note);
+                    return;
+                }
+            }
         }
 
         public ObservableCollection<Note> Notes { get; set; } = new();
@@ -158,11 +179,13 @@ namespace JustNote.App.Viewmodels
             Date = DateData.Date;
             Title = DateData.Title;
             Notes.Clear();
+            _noteID = 0;
             if(DateData.Notes != null)
             {
                 foreach (var note in DateData.Notes)
                 {
                     Notes.Add(note);
+                    _noteID++;
                 }
             }
         }
