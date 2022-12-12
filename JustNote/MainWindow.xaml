@@ -75,10 +75,22 @@
             </StackPanel>
 
             <!-- binding Title here -->
-            <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" 
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxLines="1" BorderThickness="0"
-                 Text="{Binding Title}"
-                 Background="#FFF1E6" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
+            <TextBox Name="tbTitle"
+                     Grid.Column="3"
+                     Grid.Row="1"
+                     Foreground="#A5A58D"
+                     FontSize="65" 
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     MaxLines="1"
+                     BorderThickness="0"
+                     Text="{Binding Title}"
+                     Background="#FFF1E6"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Stretch"
+                     >
+                
+            </TextBox>
         <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
               VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
             
