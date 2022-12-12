@@ -9,8 +9,7 @@
         Title="SplashScreen" Height="450" Width="800">
     <StackPanel VerticalAlignment="Center">
         <WrapPanel HorizontalAlignment="Center">
-            <Image Source="/Graphics/calendar_icon.png" Height="100" Width="100"/>
-            <Image Source="/Graphics/loading.png" Height="100" Width="100"/>
+            <Image Source="/Graphics/title.png" Height="220"/>
         </WrapPanel>
         <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="25" >
            <Bold> JustNote is loading</Bold><LineBreak></LineBreak>

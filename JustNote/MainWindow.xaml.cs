@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using JustNote.App.Viewmodels;
 using JustNote.App.Services;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace JustNote
 {
@@ -29,6 +31,9 @@ namespace JustNote
             MainViewModel viewModel = new MainViewModel(new DataDiskService());
 
             DataContext = viewModel;
+
+
         }
     }
+
 }
