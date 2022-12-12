@@ -22,6 +22,7 @@ namespace JustNote.App.Viewmodels
         private IDataService _dataService;
         private bool _calendarViewVisible = false;
         private DateTime _selectedDate;
+        private string _keyword;
 
         public CalendarViewModel(IDataService dataService,DateTime NewDate)
         {
@@ -30,13 +31,20 @@ namespace JustNote.App.Viewmodels
             HideCalendarCommand = new RelayCommand(HideCalendar);
             LoadFilenamesCommand = new RelayCommand(LoadFilenamesInDate);
             OpenNoteCommand = new RelayCommand<string>(_string => OpenNote(_string));
+            FindKeywordCommand = new RelayCommand(FindKeyword);
+            NewNoteCommand = new RelayCommand(NewNote);
+            Mediator.Register("CalendarVisible", CalendarVisible);
         }
 
         public ICommand HideCalendarCommand { get; }
 
         public ICommand LoadFilenamesCommand { get; }
 
+        public ICommand NewNoteCommand { get; }
+
         public ICommand OpenNoteCommand { get; }
+
+        public ICommand FindKeywordCommand { get; }
 
         public DateTime SelectedDate
         {
@@ -51,14 +59,32 @@ namespace JustNote.App.Viewmodels
         }
 
         public ObservableCollection<string> Files { get; set; } = new();
+        public ObservableCollection<string> KWFiles { get; set; } = new();
 
         private void SendDateToMain(DateTime date)
         {
             Mediator.Send("SetDate", date);
         }
+
+        private void NewNote()
+        {
+            Mediator.Send("SetDate", SelectedDate);
+        }
         private void HideCalendar()
         {
             CalendarViewVisible = false;
+        }
+
+        private void CalendarVisible(object isVisible)
+        {
+            bool _is = (bool)isVisible;
+            if(_is)
+            {
+                CalendarViewVisible=true;
+            }else
+            {
+                CalendarViewVisible=false;
+            }
         }
 
         private void LoadFilenamesInDate()
@@ -71,14 +97,23 @@ namespace JustNote.App.Viewmodels
                 {
                     foreach (var name in filenames)
                     {
-                        string[] tmp = {name,"0" };
                         Files.Add(name);
                     }
                 }
             }
         }
 
-        private void OpenNote(string title)
+        public string Keyword
+        {
+            get => _keyword;
+            set
+            {
+                _keyword = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void OpenNote(string? title)
         {
             if(title != null)
             {
@@ -88,6 +123,22 @@ namespace JustNote.App.Viewmodels
                 HideCalendar();
                 Debug.WriteLine(title);
                 Mediator.Send("OpenDate", date_to_open);
+            }
+        }
+
+        private void FindKeyword()
+        {
+            if (_dataService != null)
+            {
+                var filenames = _dataService.GetFilenamesKeyword(Keyword,SelectedDate);
+                KWFiles.Clear();
+                if (filenames != null)
+                {
+                    foreach (var name in filenames)
+                    {
+                        KWFiles.Add(name);
+                    }
+                }
             }
         }
 

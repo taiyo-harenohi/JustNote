@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JustNote.App.Viewmodels;
+using JustNote.App.Services;
 
 namespace JustNote.App.Views
 {
@@ -23,6 +25,10 @@ namespace JustNote.App.Views
         public ViewSetting()
         {
             InitializeComponent();
+
+             SettingViewModel viewModel = new SettingViewModel(new DataDiskService());
+
+            DataContext = viewModel;
         }
     }
 }

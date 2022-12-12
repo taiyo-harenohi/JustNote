@@ -47,10 +47,10 @@
 
             <Grid Grid.Column="1" Grid.Row="0">
                 <Button HorizontalAlignment="Left" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0" Command="{Binding SaveDateDataCommand}">
-                    <Image Source="../Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
+                    <Image Source="Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0">
-                    <Image Source="../Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0"  Command="{Binding DeleteVholeNoteCommand}">
+                    <Image Source="Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
             </Grid>
             <!-- binding calendar viewmodel here-->
@@ -104,7 +104,8 @@
                         <ItemsPanelTemplate>
                             <Canvas Name="DateCanvas"  Background="#FFF1E6">
                                 <Canvas.InputBindings>
-                                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CanvasLClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
+                                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CanvasLDClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasLClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
                                 </Canvas.InputBindings>
                             </Canvas>
                         </ItemsPanelTemplate>
@@ -126,8 +127,9 @@
             </Button>
         </Grid>
 
-        <views:ViewSetting  Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding SettingViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding SettingViewModel}" Width="300" HorizontalAlignment="Right"></views:ViewSetting>
-        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding CalendarViewModel}" Width="350" HorizontalAlignment="Left"/>
+        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}"  Width="350" HorizontalAlignment="Left"/>
+        <views:ViewSetting  Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding SettingViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}"  Width="300" HorizontalAlignment="Right"/>
+        
         
     </Grid>
 </Window>
