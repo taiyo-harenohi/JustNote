@@ -31,7 +31,7 @@ namespace JustNote.App.Viewmodels
             _dataService = dataService;
             FetchDateData = new RelayCommand<DateTime>( date => LoadDateData(date, null));
             //CanvasLClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
-            //TODO / null is not correct
+            //TODO / null is not correct // vzresila taiyo
             CanvasLDoubleClick = new RelayCommand<System.Windows.IInputElement>(Canvas => CreateTextbox(Canvas, null));
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
             ShowSettingCommand = new RelayCommand(ShowSetting);
