@@ -20,6 +20,6 @@ namespace JustNote.App.Services
 
         List<string> GetFilenamesInDate(DateTime date);
 
-        List<string> GetFilenamesKeyword(string keyword, DateTime date);
+        List<string[]> GetFilenamesKeyword(string keyword, DateTime date);
     }
 }

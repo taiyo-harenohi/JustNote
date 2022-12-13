@@ -47,7 +47,7 @@ namespace JustNote.App.Services
         }
 
         // Author: Nikola Machálková
-        public List<string> GetFilenamesKeyword(string keyword, DateTime date)
+        public List<string[]> GetFilenamesKeyword(string keyword, DateTime date)
         {
             var Reader = new FindingKeyword();
             return Reader.FindKeyword(keyword, date.ToString("dd/MM/yyyy"));
