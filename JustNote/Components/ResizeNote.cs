@@ -18,6 +18,7 @@ namespace JustNote.App.Components
         VisualCollection AdornerVisual;
         Thumb thumb;
 
+        // defining parts of the resizing element
         public ResizeNote(UIElement adornedElement) : base(adornedElement)
         {
             AdornerVisual = new VisualCollection(this);
@@ -30,6 +31,7 @@ namespace JustNote.App.Components
         }
 
 
+        // implementation of the drag logic
         private void thumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
             var ele = (FrameworkElement)AdornedElement;

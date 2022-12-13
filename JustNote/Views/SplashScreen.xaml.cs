@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-// Author: Nikola Machálková
+﻿// Author: Nikola Machálková
 
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace JustNote.App.Views
 {
-    /// <summary>
-    /// Interakční logika pro SpalshScreen.xaml
-    /// </summary>
     public partial class SplashScreen : Window
     {
         public SplashScreen()

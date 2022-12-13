@@ -1,5 +1,5 @@
 ﻿<!-- Authors: Jaromír Otevřel – basic construction
-            Nikola Machálková – design -->
+            Nikola Machálková – redesign -->
 <Window x:Class="JustNote.App.Views.SplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

@@ -1,5 +1,6 @@
 ﻿<!-- 
-// Author: Nikola Machálková
+// Authors: Nikola Machálková – design
+                  Lukáš Leták - data binding & Find Keywords ListView (used instead of a window ViewFoundKeywords.xaml)
 -->
 <UserControl x:Class="JustNote.App.Views.ViewCalendar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -44,7 +45,6 @@
             <Calendar x:Name="calendar" Background="#D0CAB8" BorderThickness="0" Foreground="#C69D7B" SelectedDate="{Binding SelectedDate}" IsTodayHighlighted="False"></Calendar>
         </Viewbox>
         <!-- bind notes for this day here-->
-        <!--TODO-delete-later: they should be probably clickable, already can imagine Beran saying sth like "nEiNTuITIvní-->
         <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="#A5A58D">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60*"></ColumnDefinition>
@@ -92,8 +92,6 @@
                 <Image Source="../Graphics/search.png" Height="30" MinHeight="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
         </Grid>
-
-        <!--  Author Lukáš Leták -->
         
         <ListView Name="NoteKWList" Grid.Row="10" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding KWFiles}" MinHeight="100" Background="#B7B7A4">
             <b:Interaction.Triggers>

@@ -1,5 +1,5 @@
 ﻿<!-- 
-// Author: Nikola Machálková
+// Author: Nikola Machálková 
 -->
 <Window x:Class="JustNote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -117,6 +117,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
+                                <!-- Author: Nikola Machálková -->
                                 <Grid Name="NoteGrid" MinHeight="120" MinWidth="150" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="20"></RowDefinition>
