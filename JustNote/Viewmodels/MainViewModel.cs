@@ -40,6 +40,7 @@ namespace JustNote.App.Viewmodels
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             DeleteVholeNoteCommand = new RelayCommand(DeleteVholeNote);
+            ExportDataCommand = new RelayCommand(ExportData);
             //CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
             //SettingViewModel = new SettingViewModel(dataService);
             
@@ -104,6 +105,7 @@ namespace JustNote.App.Viewmodels
 
         public ICommand DeleteVholeNoteCommand { get; }
         public ICommand SaveDateDataCommand { get; }
+        public ICommand ExportDataCommand { get; }
         public ICommand CanvasLDClick { get; private set; }
 
         public ICommand CanvasLClick { get; private set; }
@@ -224,5 +226,9 @@ namespace JustNote.App.Viewmodels
             _dataService.SaveDateData(DateData);
         }
 
+        private void ExportData()
+        {
+
+        }
     }
 }
