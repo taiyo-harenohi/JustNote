@@ -29,7 +29,7 @@ namespace JustNote
             InitializeComponent();
 
             MainViewModel viewModel = new MainViewModel(new DataDiskService());
-
+            
             DataContext = viewModel;
 
 

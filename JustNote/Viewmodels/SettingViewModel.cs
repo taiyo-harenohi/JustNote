@@ -1,5 +1,5 @@
 ﻿
-// Authors: Nikola Machálková (basic layout and commands)
+// Authors: Nikola Machálková (basic layout and commands) Lukáš Leták (mediator)
 
 using System;
 using System.Collections.Generic;
@@ -25,6 +25,7 @@ namespace JustNote.App.Viewmodels
         {
             _dataService = dataService;
             HideSettingCommand = new RelayCommand(HideSetting);
+            Mediator.Register("SettingVisible", SettingVisible);
         }
 
         public ICommand HideSettingCommand { get; }
@@ -33,6 +34,19 @@ namespace JustNote.App.Viewmodels
         private void HideSetting()
         {
             SettingViewVisible = false;
+        }
+
+        private void SettingVisible(object isVisible)
+        {
+            bool _is = (bool)isVisible;
+            if (_is)
+            {
+                SettingViewVisible = true;
+            }
+            else
+            {
+                SettingViewVisible = false;
+            }
         }
 
         public bool SettingViewVisible

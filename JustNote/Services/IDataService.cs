@@ -12,9 +12,11 @@ namespace JustNote.App.Services
 {
     public interface IDataService
     {
-        Data GetDateData(DateTime date, string title);
+        Data GetDateData(DateTime date, string? title);
 
         void SaveDateData(Data data);
+
+        void DeleteDateData(Data data);
 
         List<string> GetFilenamesInDate(DateTime date);
 
