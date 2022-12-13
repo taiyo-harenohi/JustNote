@@ -16,7 +16,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
-        Title="MainWindow" Height="800" Width="1000" MinHeight="500" MinWidth="500">
+        Title="MainWindow" Height="800" Width="1000" MinHeight="500" MinWidth="500"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>

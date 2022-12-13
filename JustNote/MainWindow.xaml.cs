@@ -30,13 +30,11 @@ namespace JustNote
         public MainWindow()
         {
             InitializeComponent();
+            
 
             MainViewModel viewModel = new MainViewModel(new DataDiskService());
             
             DataContext = viewModel;
-
-
         }
     }
-
 }
