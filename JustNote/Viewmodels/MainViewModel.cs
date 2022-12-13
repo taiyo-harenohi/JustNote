@@ -130,7 +130,7 @@ namespace JustNote.App.Viewmodels
             if (DateCanvas == null)
                 return;
             Mediator.Send("CalendarVisible", false);
-            Mediator.Send("SettingVisible", true);
+            Mediator.Send("SettingVisible", false);
         }
 
         private void RemoveTextbox(int key)

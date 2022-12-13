@@ -113,12 +113,16 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
+                                <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
+                                    <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
+                                </Button>
                                 <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Text}"/>
+                                
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                </ScrollViewer>
+            </ScrollViewer>
 
             <!-- binding settings viewmodel here-->
             <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"

@@ -95,7 +95,7 @@
 
         <!--  Author Lukáš Leták -->
         
-        <ListView Name="NoteKWList" Grid.Row="10" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding Files}" MinHeight="100" Background="#B7B7A4">
+        <ListView Name="NoteKWList" Grid.Row="10" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding KWFiles}" MinHeight="100" Background="#B7B7A4">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="SelectionChanged">
                     <b:InvokeCommandAction Command="{Binding OpenNoteCommand}"
