@@ -14,6 +14,8 @@ using JustNote.App.Services;
 using JustNote.Backend.Data;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Diagnostics;
+using JustNote.App.Components;
+using System.Windows.Documents;
 
 namespace JustNote.App.Viewmodels
 {
@@ -39,11 +41,22 @@ namespace JustNote.App.Viewmodels
             MouseLBDownCommand = new RelayCommand<System.Windows.IInputElement>(Canvas => MouseLBDown(Canvas));
             MouseLBUpCommand = new RelayCommand(MouseLBUp);
             MouseMoveCommand = new RelayCommand<System.Windows.IInputElement>(Canvas => MouseMove(Canvas));
+            LoadGridCommand = new RelayCommand<System.Windows.Media.Visual>(Grid => LoadGrid(Grid));
         }
 
         public ICommand MouseLBDownCommand { get; }
         public ICommand MouseLBUpCommand { get; }
         public ICommand MouseMoveCommand { get; }
+        public ICommand LoadGridCommand { get; }
+
+        private void LoadGrid(System.Windows.Media.Visual Grid)
+        {
+            if (Grid == null)
+                return;
+
+            var k = (System.Windows.UIElement)Grid;
+            AdornerLayer.GetAdornerLayer(Grid).Add(new ResizeNote((System.Windows.UIElement)Grid));
+        }
 
         private void MouseMove(System.Windows.IInputElement DateCanvas)
         {
