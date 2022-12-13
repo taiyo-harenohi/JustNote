@@ -41,10 +41,12 @@ namespace JustNote.App.Viewmodels
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             DeleteVholeNoteCommand = new RelayCommand(DeleteVholeNote);
+            MouseMoveCommand = new RelayCommand<int>(key => MouseMove(key));
             ExportDataTXTCommand = new RelayCommand(ExportDataTXT(note, path));
             //CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
             //SettingViewModel = new SettingViewModel(dataService);
             
+
             Mediator.Register("SetDate", SetDate);
             Mediator.Register("OpenDate", OpenDate);
         }
@@ -98,6 +100,25 @@ namespace JustNote.App.Viewmodels
             LoadDateData(Date, Title);
         }
 
+        public ICommand MouseMoveCommand { get;}
+
+        private Note? moving = null;
+
+        private void MouseMove(int key)
+        {
+            if (MouseMoveCommand != null)
+            {
+                foreach (var note in Notes)
+                {
+                    if (note.Key == key)
+                    {
+                        moving = note;
+                        return;
+                    }
+                }
+            }
+        }
+
         public ICommand ShowCalendarCommand { get; }
         public ICommand ShowSettingCommand { get; }
         public ICommand FetchDateData { get; }
@@ -133,7 +154,17 @@ namespace JustNote.App.Viewmodels
             if (DateCanvas == null)
                 return;
             Mediator.Send("CalendarVisible", false);
-            Mediator.Send("SettingVisible", true);
+            Mediator.Send("SettingVisible", false);
+            if(moving != null)
+            {
+                var mouseX = Mouse.GetPosition(DateCanvas).X;
+                var mouseY = Mouse.GetPosition(DateCanvas).Y;
+                int[] mouseCoord = { (int)mouseX, (int)mouseY };
+                moving.Position = mouseCoord;
+                Notes.Remove(moving);
+                Notes.Add(moving);
+                moving = null;
+            }
         }
 
         private void RemoveTextbox(int key)

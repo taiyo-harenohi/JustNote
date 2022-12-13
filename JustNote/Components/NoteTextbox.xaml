@@ -5,9 +5,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+
              xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
-             xmlns:local="clr-namespace:JustNote.App.Components"
+             xmlns:local="clr-namespace:JustNote.App.Components" d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
              mc:Ignorable="d" MinHeight="120" MinWidth="150">
     <Grid Name="NoteGrid" MinHeight="120" MinWidth="150">
         <Grid.RowDefinitions>
@@ -18,7 +20,7 @@
             <!-- bind deleting button here -->
             <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     MouseLeftButtonDown="Control_MouseLeftButtonDown" MouseLeftButtonUp="Control_MouseLeftButtonUp" MouseMove="Control_MouseMove">
-                <Button Name="btnCancel" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.NoteRemoveCommand}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
+                <Button Name="btnCancel" Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
                     <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
                 </Button>
             </StackPanel>
