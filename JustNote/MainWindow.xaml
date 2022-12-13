@@ -99,6 +99,8 @@
 			<!-- binding Text here-->
             <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto"
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
+                
+                <!--author Lukáš leták -->
                 <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -113,13 +115,6 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
-                                <!--
-                                <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
-                                    <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
-                                </Button>
-                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Text}"/>
-                                -->
-                                
                                 <Grid Name="NoteGrid" MinHeight="120" MinWidth="150" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="20"></RowDefinition>

@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 namespace JustNote.App.Viewmodels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
         private IDataService _dataService;
         private CalendarViewModel _calendarViewModel;
@@ -36,18 +36,16 @@ namespace JustNote.App.Viewmodels
             CanvasLDClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
             CanvasLClick = new RelayCommand<System.Windows.IInputElement>(Canvas => HideMenus(Canvas));
             NoteRemoveCommand = new RelayCommand<int>(key => RemoveTextbox(key));
+
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             DeleteVholeNoteCommand = new RelayCommand(DeleteVholeNote);
-            //CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
-            //SettingViewModel = new SettingViewModel(dataService);
             
             Mediator.Register("SetDate", SetDate);
             Mediator.Register("OpenDate", OpenDate);
         }
-        
-
+       
 
         public CalendarViewModel CalendarViewModel
         {
@@ -68,13 +66,36 @@ namespace JustNote.App.Viewmodels
                 OnPropertyChanged();
             }
         }
-       
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public ObservableCollection<NoteViewModel> Notes { get; set; } = new();
+
+        public Data DateData
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _data;
+            private set
+            {
+                _data = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime Date
+        {
+            get => _Date;
+            set
+            {
+                _Date = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public string Title
+        {
+            get => _Title;
+            set
+            {
+                _Title = value;
+                OnPropertyChanged();
+            }
         }
 
         private void SetDate(object date)
@@ -98,17 +119,37 @@ namespace JustNote.App.Viewmodels
 
         public ICommand ShowCalendarCommand { get; }
         public ICommand ShowSettingCommand { get; }
+
         public ICommand FetchDateData { get; }
+        public ICommand DeleteVholeNoteCommand { get; }
 
         public ICommand NoteRemoveCommand { get; }
-
-        public ICommand DeleteVholeNoteCommand { get; }
         public ICommand SaveDateDataCommand { get; }
-        public ICommand CanvasLDClick { get; private set; }
 
+        public ICommand CanvasLDClick { get; private set; }
         public ICommand CanvasLClick { get; private set; }
 
-        private void CreateTextbox(System.Windows.IInputElement DateCanvas)
+        private static void HideMenus(System.Windows.IInputElement? DateCanvas)
+        {
+            if (Mouse.DirectlyOver != DateCanvas)
+                return;
+            if (DateCanvas == null)
+                return;
+            Mediator.Send("CalendarVisible", false);
+            Mediator.Send("SettingVisible", false);
+        }
+
+        private void ShowCalendar()
+        {
+            Mediator.Send("CalendarVisible", true);
+        }
+
+        private void ShowSetting()
+        {
+            Mediator.Send("SettingVisible", true);
+        }
+
+        private void CreateTextbox(System.Windows.IInputElement? DateCanvas)
         {
             if (Mouse.DirectlyOver != DateCanvas)
                 return;
@@ -124,16 +165,6 @@ namespace JustNote.App.Viewmodels
             _noteID++;
         }
 
-        private void HideMenus(System.Windows.IInputElement DateCanvas)
-        {
-            if (Mouse.DirectlyOver != DateCanvas)
-                return;
-            if (DateCanvas == null)
-                return;
-            Mediator.Send("CalendarVisible", false);
-            Mediator.Send("SettingVisible", false);
-        }
-
         private void RemoveTextbox(int key)
         {
             foreach (var note in Notes)
@@ -146,53 +177,12 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        public ObservableCollection<NoteViewModel> Notes { get; set; } = new();
-
-
-        public Data DateData
-        {
-            get => _data;
-            private set
-            {
-                _data = value;
-                OnPropertyChanged();
-            }
-        }
-        public DateTime Date 
-        {
-            get => _Date; 
-            set 
-            { 
-                _Date = value;
-                OnPropertyChanged(); 
-            } 
-        }
-
-        public string Title
-        {
-            get => _Title;
-            set
-            {
-                _Title = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private void ShowCalendar()
-        {
-            Mediator.Send("CalendarVisible", true);
-        }
-
-        private void ShowSetting()
-        {
-            Mediator.Send("SettingVisible", true);
-        }
-
         private void DeleteVholeNote()
         {
             _dataService.DeleteDateData(DateData);
             LoadDateData(DateData.Date, null);
         }
+
         private void LoadDateData(DateTime date, string? title)
         {
             DateData = _dataService.GetDateData(date,title);
@@ -226,6 +216,5 @@ namespace JustNote.App.Viewmodels
             }
             _dataService.SaveDateData(DateData);
         }
-
     }
 }

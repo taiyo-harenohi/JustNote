@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 namespace JustNote.App.Viewmodels
 {
-    public class NoteViewModel : INotifyPropertyChanged
+    public class NoteViewModel : ViewModelBase
     {
 
         private int _key;
@@ -101,17 +101,5 @@ namespace JustNote.App.Viewmodels
                 OnPropertyChanged();
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        }
-
-
-        
-
     }
 }

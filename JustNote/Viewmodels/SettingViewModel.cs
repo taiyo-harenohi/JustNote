@@ -16,7 +16,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 
 namespace JustNote.App.Viewmodels
 {
-    public class SettingViewModel : INotifyPropertyChanged
+    public class SettingViewModel : ViewModelBase
     {
         private IDataService _dataService;
         private bool _settingViewVisible = false;
@@ -57,14 +57,6 @@ namespace JustNote.App.Viewmodels
                 _settingViewVisible = value;
                 OnPropertyChanged();
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
         }
     }
 }
