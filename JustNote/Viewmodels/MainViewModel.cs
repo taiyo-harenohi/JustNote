@@ -26,6 +26,7 @@ namespace JustNote.App.Viewmodels
         private DateTime _Date;
         private string _Title;
         private int _noteID;
+
      
 
         public MainViewModel(IDataService dataService)
@@ -40,7 +41,7 @@ namespace JustNote.App.Viewmodels
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
             DeleteVholeNoteCommand = new RelayCommand(DeleteVholeNote);
-            ExportDataCommand = new RelayCommand(ExportData);
+            ExportDataTXTCommand = new RelayCommand(ExportDataTXT(note, path));
             //CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
             //SettingViewModel = new SettingViewModel(dataService);
             
@@ -105,7 +106,7 @@ namespace JustNote.App.Viewmodels
 
         public ICommand DeleteVholeNoteCommand { get; }
         public ICommand SaveDateDataCommand { get; }
-        public ICommand ExportDataCommand { get; }
+        public ICommand ExportDataTXTCommand { get; }
         public ICommand CanvasLDClick { get; private set; }
 
         public ICommand CanvasLClick { get; private set; }
@@ -226,19 +227,13 @@ namespace JustNote.App.Viewmodels
             _dataService.SaveDateData(DateData);
         }
 
-        private void ExportData()
+        private void ExportDataTXT(object note, CallerFilePathAttribute filepath)
         {
-            Debug.WriteLine("exporting");
-            DateData.Date = Date;
-            DateData.Title = Title;
-            if (DateData.Notes != null)
-            {
-                foreach (var note in DateData.Notes)
-                {
-                    DateData.Notes.ExportTXT(note);
-                }
-            }
-            
+            Debug.WriteLine("saving");
+
+            Data _note = (Data)note;
+            Export.ExportTXT(_note, filepath.ToString());
+
         }
     }
 }
