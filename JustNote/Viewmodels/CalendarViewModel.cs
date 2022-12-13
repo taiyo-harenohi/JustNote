@@ -31,6 +31,7 @@ namespace JustNote.App.Viewmodels
             HideCalendarCommand = new RelayCommand(HideCalendar);
             LoadFilenamesCommand = new RelayCommand(LoadFilenamesInDate);
             OpenNoteCommand = new RelayCommand<string>(_string => OpenNote(_string));
+            OpenFoundNoteCommand = new RelayCommand<string[]>(_string => OpenFoundNote(_string));
             FindKeywordCommand = new RelayCommand(FindKeyword);
             NewNoteCommand = new RelayCommand(NewNote);
             Mediator.Register("CalendarVisible", CalendarVisible);
@@ -75,7 +76,7 @@ namespace JustNote.App.Viewmodels
         //Colection of filenems that are on selected date
         public ObservableCollection<string> Files { get; set; } = new();
         //Colection of found files usin keyword in selected date
-        public ObservableCollection<string> KWFiles { get; set; } = new();
+        public ObservableCollection<string[]> KWFiles { get; set; } = new();
 
         public ICommand HideCalendarCommand { get; }
 
@@ -84,6 +85,8 @@ namespace JustNote.App.Viewmodels
         public ICommand NewNoteCommand { get; }
 
         public ICommand OpenNoteCommand { get; }
+
+        public ICommand OpenFoundNoteCommand { get; }
 
         public ICommand FindKeywordCommand { get; }
 
@@ -142,6 +145,20 @@ namespace JustNote.App.Viewmodels
                 Data date_to_open = new();
                 date_to_open.Date = SelectedDate;
                 date_to_open.Title = title;
+                HideCalendar();
+                Debug.WriteLine(title);
+                Mediator.Send("OpenDate", date_to_open);
+            }
+        }
+
+        //Opens selected date in main
+        private void OpenFoundNote(string[]? title)
+        {
+            if (title != null)
+            {
+                Data date_to_open = new();
+                date_to_open.Date = DateTime.Parse(title[1]);
+                date_to_open.Title = title[0];
                 HideCalendar();
                 Debug.WriteLine(title);
                 Mediator.Send("OpenDate", date_to_open);

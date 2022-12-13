@@ -96,7 +96,7 @@
         <ListView Name="NoteKWList" Grid.Row="10" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding KWFiles}" MinHeight="100" Background="#B7B7A4">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="SelectionChanged">
-                    <b:InvokeCommandAction Command="{Binding OpenNoteCommand}"
+                    <b:InvokeCommandAction Command="{Binding OpenFoundNoteCommand}"
                                            CommandParameter="{Binding ElementName=NoteKWList, Path=SelectedItem}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
@@ -109,7 +109,7 @@
                                 <ColumnDefinition Width="60*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="20" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="20" FontStretch="Expanded" Content="{Binding [0]}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </Grid>
                     </Button>
                 </DataTemplate>
