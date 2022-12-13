@@ -228,7 +228,17 @@ namespace JustNote.App.Viewmodels
 
         private void ExportData()
         {
-            //TODO
+            Debug.WriteLine("exporting");
+            DateData.Date = Date;
+            DateData.Title = Title;
+            if (DateData.Notes != null)
+            {
+                foreach (var note in DateData.Notes)
+                {
+                    DateData.Notes.ExportTXT(note);
+                }
+            }
+            
         }
     }
 }
