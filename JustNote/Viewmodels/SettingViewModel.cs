@@ -20,12 +20,34 @@ namespace JustNote.App.Viewmodels
     {
         private IDataService _dataService;
         private bool _settingViewVisible = false;
+        private TextSettingsViewModel _textSettingsViewModel;
+        private ExportViewModel _exportViewModel;
 
         public SettingViewModel(IDataService dataService)
         {
             _dataService = dataService;
             HideSettingCommand = new RelayCommand(HideSetting);
             Mediator.Register("SettingVisible", SettingVisible);
+        }
+
+        public TextSettingsViewModel TextSettingsViewModel
+        {
+            get { return _textSettingsViewModel; }
+            set
+            {
+                _textSettingsViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ExportViewModel ExportViewModel
+        {
+            get { return _exportViewModel; }
+            set
+            {
+                _exportViewModel = value;
+                OnPropertyChanged();
+            }
         }
 
         public ICommand HideSettingCommand { get; }
