@@ -19,19 +19,24 @@ namespace JustNote.Backend
 
             date = TrimText(date);
 
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/";
 
-            string[] files;
+            string[] dateDirs = Directory.GetDirectories(filepathDirectory);
+            List<string> files = new();
             try
             {
-               files = Directory.GetFiles(filepathDirectory, "*" + keyword + "*");
+                foreach(string dateDir in dateDirs)
+                {
+                    files.AddRange( Directory.GetFiles(dateDir + "/", "*" + keyword + "*"));
+                }
+              
             }
             catch (Exception ex)
             {
                 return result;
             }
 
-            for(int i = 0; i < files.Length; i++)
+            for(int i = 0; i < files.Count; i++)
             {
                 files[i] = Path.GetFileName(files[i]);
                 files[i] = TrimText(files[i]);
