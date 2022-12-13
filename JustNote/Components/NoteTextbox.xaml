@@ -18,8 +18,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="#CB997E" BorderThickness="1">
             <!-- bind deleting button here -->
-            <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    MouseLeftButtonDown="Control_MouseLeftButtonDown" MouseLeftButtonUp="Control_MouseLeftButtonUp" MouseMove="Control_MouseMove">
+            <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 
             </StackPanel>
         </Border>
