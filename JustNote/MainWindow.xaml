@@ -47,10 +47,10 @@
 
             <Grid Grid.Column="1" Grid.Row="0">
                 <Button HorizontalAlignment="Left" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0" Command="{Binding SaveDateDataCommand}">
-                    <Image Source="../Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
+                    <Image Source="Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0">
-                    <Image Source="../Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0"  Command="{Binding DeleteVholeNoteCommand}">
+                    <Image Source="Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
             </Grid>
             <!-- binding calendar viewmodel here-->
@@ -58,6 +58,7 @@
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
+            
             <!-- binding Date (has two parts: date and time) here 
             //Author: Jaromír Otevřel
             -->
@@ -70,7 +71,6 @@
                        FontSize="25"
                        Foreground="#A5A58D"
                        Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" >
-
                 </TextBlock>
                 <TextBlock 
                        FontSize="25"
@@ -100,12 +100,15 @@
 			<!-- binding Text here-->
             <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto"
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
+                
+                <!--author Lukáš leták -->
                 <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas Name="DateCanvas"  Background="#FFF1E6">
                                 <Canvas.InputBindings>
-                                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CanvasLClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
+                                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CanvasLDClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasLClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
                                 </Canvas.InputBindings>
                             </Canvas>
                         </ItemsPanelTemplate>
@@ -113,12 +116,42 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
-                                <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Text}"/>
+                                <Grid Name="NoteGrid" MinHeight="120" MinWidth="150" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                        <RowDefinition Height="98*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" BorderBrush="#CB997E" BorderThickness="1">
+                                        <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="Loaded">
+                                                    <b:InvokeCommandAction Command="{Binding LoadGridCommand}" CommandParameter="{Binding ElementName=NoteGrid}"></b:InvokeCommandAction>
+                                                </b:EventTrigger>
+                                                <b:EventTrigger EventName="PreviewMouseDown" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseLBDownCommand}" CommandParameter="{Binding ElementName=DateCanvas}"/>
+                                                </b:EventTrigger>
+                                                <b:EventTrigger EventName="PreviewMouseUp" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseLBUpCommand}" />
+                                                </b:EventTrigger>
+                                                <b:EventTrigger EventName="PreviewMouseMove" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseMoveCommand}" CommandParameter="{Binding ElementName=DateCanvas}" />
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                            <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0"  Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
+                                                <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
+                                    <DockPanel Name="dockpanel" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <TextBox Background="#EDDCD2" Text="{Binding Text}" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                            FontSize="35" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+                                    </DockPanel>
+                                </Grid>
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                </ScrollViewer>
+            </ScrollViewer>
 
             <!-- binding settings viewmodel here-->
             <Button Grid.Column="5" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
@@ -127,8 +160,9 @@
             </Button>
         </Grid>
 
-        <views:ViewSetting  Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding SettingViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding SettingViewModel}" Width="300" HorizontalAlignment="Right"></views:ViewSetting>
-        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}" DataContext="{Binding CalendarViewModel}" Width="350" HorizontalAlignment="Left"/>
+        <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}"  Width="350" HorizontalAlignment="Left"/>
+        <views:ViewSetting  Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding SettingViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}"  Width="300" HorizontalAlignment="Right"/>
+        
         
     </Grid>
 </Window>

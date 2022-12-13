@@ -28,6 +28,7 @@
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
         <!-- bind going back to main view/hiding this view again -->
@@ -51,11 +52,11 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"  MinHeight="30" Foreground="#FFF1E6" Content="Notes" FontSize="18" FontStretch="Expanded"></Label>
             <!-- bindind making new note -->
-            <Button Grid.Column="1" Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Right" MinWidth="30">
+            <Button Grid.Column="1" Background="Transparent" BorderThickness="0" Command="{Binding NewNoteCommand}" HorizontalContentAlignment="Right" MinWidth="30">
                 <Image Source="../Graphics/add.png" Width="30" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="30"></Image>
             </Button>
         </Grid>
-        <ListView Name="NoteList" Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding Files}" MinHeight="100" Background="#B7B7A4">
+        <ListView Name="NoteList" Grid.Row="6" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding Files}" MinHeight="100" Background="#B7B7A4">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="SelectionChanged">
                     <b:InvokeCommandAction Command="{Binding OpenNoteCommand}"
@@ -72,8 +73,6 @@
                             </Grid.ColumnDefinitions>
                             <!-- bind title of note here-->
                             <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="20" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                            <!-- bind date of note here-->
-                            <Label Grid.Column="1" Foreground="#957D60" FontSize="20" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
                         </Grid>
                     </Button>
                 </DataTemplate>
@@ -87,11 +86,37 @@
                 <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!-- keyword input-->
-            <TextBox Grid.Column="0" BorderBrush="#B7B7A4" BorderThickness="3" FontStretch="Expanded" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#A5A58D" Foreground="#FFF1E6"></TextBox>
+            <TextBox Grid.Column="0" BorderBrush="#B7B7A4" BorderThickness="3" Text="{Binding Keyword}" FontStretch="Expanded" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#A5A58D" Foreground="#FFF1E6"></TextBox>
             <!-- bind button for opening window ViewFoundKeyword with found notes with keyword in title -->
-            <Button Grid.Column="1" BorderThickness="0" Background="Transparent" MinHeight="30">
+            <Button Grid.Column="1" BorderThickness="0" Background="Transparent" MinHeight="30" Command="{Binding FindKeywordCommand}">
                 <Image Source="../Graphics/search.png" Height="30" MinHeight="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
         </Grid>
+
+        <!--  Author Lukáš Leták -->
+        
+        <ListView Name="NoteKWList" Grid.Row="10" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding KWFiles}" MinHeight="100" Background="#B7B7A4">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectionChanged">
+                    <b:InvokeCommandAction Command="{Binding OpenNoteCommand}"
+                                           CommandParameter="{Binding ElementName=NoteKWList, Path=SelectedItem}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Button Background="Transparent" BorderThickness="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="60*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Foreground="#FFF1E6" FontSize="20" FontStretch="Expanded" Content="{Binding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
     </Grid>
 </UserControl>

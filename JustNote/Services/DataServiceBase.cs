@@ -13,7 +13,7 @@ namespace JustNote.App.Services
 {
     public abstract class DataServiceBase : IDataService
     {
-        public Data GetDateData(DateTime date, string title)
+        public Data GetDateData(DateTime date, string? title)
         {
             if (title == null)
             {
@@ -38,6 +38,12 @@ namespace JustNote.App.Services
         {
             var Reader = new SearchingData();
             return Reader.SearchData(date.ToString("dd/MM/yyyy"));
+        }
+
+        public void DeleteDateData(Data data)
+        {
+            var Remover = new DeletingData();
+            Remover.Delete(data);
         }
 
         // Author: Nikola Machálková

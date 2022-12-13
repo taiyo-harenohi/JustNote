@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+// author Lukáš Leták
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +32,7 @@ namespace JustNote
             InitializeComponent();
 
             MainViewModel viewModel = new MainViewModel(new DataDiskService());
-
+            
             DataContext = viewModel;
 
 

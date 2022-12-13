@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 namespace JustNote.App.Viewmodels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
         private IDataService _dataService;
         private CalendarViewModel _calendarViewModel;
@@ -25,22 +25,27 @@ namespace JustNote.App.Viewmodels
         private Data _data;
         private DateTime _Date;
         private string _Title;
+        private int _noteID;
+     
 
         public MainViewModel(IDataService dataService)
         {
             _dataService = dataService;
+            _noteID = 0;
             FetchDateData = new RelayCommand<DateTime>( date => LoadDateData(date, null));
-            CanvasLClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
+            CanvasLDClick = new RelayCommand<System.Windows.IInputElement>( Canvas => CreateTextbox(Canvas));
+            CanvasLClick = new RelayCommand<System.Windows.IInputElement>(Canvas => HideMenus(Canvas));
+            NoteRemoveCommand = new RelayCommand<int>(key => RemoveTextbox(key));
+
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
-            CalendarViewModel = new CalendarViewModel(dataService, DateTime.Now);
-            SettingViewModel = new SettingViewModel(dataService);
+            DeleteVholeNoteCommand = new RelayCommand(DeleteVholeNote);
+            
             Mediator.Register("SetDate", SetDate);
             Mediator.Register("OpenDate", OpenDate);
         }
-
-        
+       
 
         public CalendarViewModel CalendarViewModel
         {
@@ -61,13 +66,36 @@ namespace JustNote.App.Viewmodels
                 OnPropertyChanged();
             }
         }
-       
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public ObservableCollection<NoteViewModel> Notes { get; set; } = new();
+
+        public Data DateData
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _data;
+            private set
+            {
+                _data = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime Date
+        {
+            get => _Date;
+            set
+            {
+                _Date = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public string Title
+        {
+            get => _Title;
+            set
+            {
+                _Title = value;
+                OnPropertyChanged();
+            }
         }
 
         private void SetDate(object date)
@@ -91,12 +119,37 @@ namespace JustNote.App.Viewmodels
 
         public ICommand ShowCalendarCommand { get; }
         public ICommand ShowSettingCommand { get; }
+
         public ICommand FetchDateData { get; }
-        
+        public ICommand DeleteVholeNoteCommand { get; }
+
+        public ICommand NoteRemoveCommand { get; }
         public ICommand SaveDateDataCommand { get; }
+
+        public ICommand CanvasLDClick { get; private set; }
         public ICommand CanvasLClick { get; private set; }
 
-        private void CreateTextbox(System.Windows.IInputElement DateCanvas)
+        private static void HideMenus(System.Windows.IInputElement? DateCanvas)
+        {
+            if (Mouse.DirectlyOver != DateCanvas)
+                return;
+            if (DateCanvas == null)
+                return;
+            Mediator.Send("CalendarVisible", false);
+            Mediator.Send("SettingVisible", false);
+        }
+
+        private void ShowCalendar()
+        {
+            Mediator.Send("CalendarVisible", true);
+        }
+
+        private void ShowSetting()
+        {
+            Mediator.Send("SettingVisible", true);
+        }
+
+        private void CreateTextbox(System.Windows.IInputElement? DateCanvas)
         {
             if (Mouse.DirectlyOver != DateCanvas)
                 return;
@@ -105,64 +158,45 @@ namespace JustNote.App.Viewmodels
             var mouseX = Mouse.GetPosition(DateCanvas).X;
             var mouseY = Mouse.GetPosition(DateCanvas).Y;
             int[] mouseCoord = { (int)mouseX, (int)mouseY };
-            string input = "Test Text";
-            var note = new Note(1, input, mouseCoord);
-            Notes.Add(note);
+            string input = "";
+            var note = new Note(_noteID, input, mouseCoord);
+            var NoteVM = new NoteViewModel(note);
+            Notes.Add(NoteVM);
+            _noteID++;
         }
 
-        public ObservableCollection<Note> Notes { get; set; } = new();
-
-
-        public Data DateData
+        private void RemoveTextbox(int key)
         {
-            get => _data;
-            private set
+            foreach (var note in Notes)
             {
-                _data = value;
-                OnPropertyChanged();
-            }
-        }
-        public DateTime Date 
-        {
-            get => _Date; 
-            set 
-            { 
-                _Date = value;
-                OnPropertyChanged(); 
-            } 
-        }
-
-        public string Title
-        {
-            get => _Title;
-            set
-            {
-                _Title = value;
-                OnPropertyChanged();
+                if (note.Key == key)
+                {
+                    Notes.Remove(note);
+                    return;
+                }
             }
         }
 
-        private void ShowCalendar()
+        private void DeleteVholeNote()
         {
-            CalendarViewModel.CalendarViewVisible = true;
+            _dataService.DeleteDateData(DateData);
+            LoadDateData(DateData.Date, null);
         }
 
-        private void ShowSetting()
-        {
-            SettingViewModel.SettingViewVisible = true;
-        }
-
-        private void LoadDateData(DateTime date, string title)
+        private void LoadDateData(DateTime date, string? title)
         {
             DateData = _dataService.GetDateData(date,title);
             Date = DateData.Date;
             Title = DateData.Title;
             Notes.Clear();
+            _noteID = 0;
             if(DateData.Notes != null)
             {
                 foreach (var note in DateData.Notes)
                 {
-                    Notes.Add(note);
+                    var NoteVM = new NoteViewModel(note);
+                    Notes.Add(NoteVM);
+                    _noteID++;
                 }
             }
         }
@@ -177,10 +211,10 @@ namespace JustNote.App.Viewmodels
             DateData.Notes.Clear();
             foreach (var note in Notes)
             {
-                DateData.Notes.Add(note);
+                var normalNote = new Note(note.Key, note.Text, note.Position);
+                DateData.Notes.Add(normalNote);
             }
             _dataService.SaveDateData(DateData);
         }
-
     }
 }

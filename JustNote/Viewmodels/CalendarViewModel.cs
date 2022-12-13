@@ -17,11 +17,12 @@ using System.Diagnostics;
 
 namespace JustNote.App.Viewmodels
 {
-    public class CalendarViewModel : INotifyPropertyChanged
+    public class CalendarViewModel : ViewModelBase
     {
         private IDataService _dataService;
         private bool _calendarViewVisible = false;
         private DateTime _selectedDate;
+        private string _keyword;
 
         public CalendarViewModel(IDataService dataService,DateTime NewDate)
         {
@@ -30,14 +31,12 @@ namespace JustNote.App.Viewmodels
             HideCalendarCommand = new RelayCommand(HideCalendar);
             LoadFilenamesCommand = new RelayCommand(LoadFilenamesInDate);
             OpenNoteCommand = new RelayCommand<string>(_string => OpenNote(_string));
+            FindKeywordCommand = new RelayCommand(FindKeyword);
+            NewNoteCommand = new RelayCommand(NewNote);
+            Mediator.Register("CalendarVisible", CalendarVisible);
         }
 
-        public ICommand HideCalendarCommand { get; }
-
-        public ICommand LoadFilenamesCommand { get; }
-
-        public ICommand OpenNoteCommand { get; }
-
+        //Date that is selected in calendar
         public DateTime SelectedDate
         {
             get { return _selectedDate; }
@@ -50,17 +49,75 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        public ObservableCollection<string> Files { get; set; } = new();
-
-        private void SendDateToMain(DateTime date)
+        //Keyword to search for
+        public string Keyword
         {
-            Mediator.Send("SetDate", date);
+            get => _keyword;
+            set
+            {
+                _keyword = value;
+                OnPropertyChanged();
+            }
         }
+
+        //If the calendar menu is shown/hidden
+        public bool CalendarViewVisible
+        {
+            get { return _calendarViewVisible; }
+            set
+            {
+                _calendarViewVisible = value;
+                LoadFilenamesInDate();
+                OnPropertyChanged();
+            }
+        }
+
+        //Colection of filenems that are on selected date
+        public ObservableCollection<string> Files { get; set; } = new();
+        //Colection of found files usin keyword in selected date
+        public ObservableCollection<string> KWFiles { get; set; } = new();
+
+        public ICommand HideCalendarCommand { get; }
+
+        public ICommand LoadFilenamesCommand { get; }
+
+        public ICommand NewNoteCommand { get; }
+
+        public ICommand OpenNoteCommand { get; }
+
+        public ICommand FindKeywordCommand { get; }
+
         private void HideCalendar()
         {
             CalendarViewVisible = false;
         }
 
+        //change visibility from MainViewModel using mediator
+        private void CalendarVisible(object isVisible)
+        {
+            bool _is = (bool)isVisible;
+            if (_is)
+            {
+                CalendarViewVisible = true;
+            }
+            else
+            {
+                CalendarViewVisible = false;
+            }
+        }
+
+        //Crates new note in main whenewer selected date changes
+        private static void SendDateToMain(DateTime date)
+        {
+            Mediator.Send("SetDate", date);
+        }
+        //Crates new note in main when you click on the pluss button nexto note (used when you saved note and want to create new in same date)
+        private void NewNote()
+        {
+            Mediator.Send("SetDate", SelectedDate);
+        }
+        
+        //Loads all filenemes in selected date
         private void LoadFilenamesInDate()
         {
             if(_dataService != null)
@@ -71,14 +128,14 @@ namespace JustNote.App.Viewmodels
                 {
                     foreach (var name in filenames)
                     {
-                        string[] tmp = {name,"0" };
                         Files.Add(name);
                     }
                 }
             }
         }
 
-        private void OpenNote(string title)
+        //Opens selected date in main
+        private void OpenNote(string? title)
         {
             if(title != null)
             {
@@ -91,23 +148,21 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        public bool CalendarViewVisible
+        //Finds keyword in selected date and lists all files matchig it
+        private void FindKeyword()
         {
-            get { return _calendarViewVisible; }
-            set
+            if (_dataService != null)
             {
-                _calendarViewVisible = value;
-                LoadFilenamesInDate();
-                OnPropertyChanged();
+                var filenames = _dataService.GetFilenamesKeyword(Keyword,SelectedDate);
+                KWFiles.Clear();
+                if (filenames != null)
+                {
+                    foreach (var name in filenames)
+                    {
+                        KWFiles.Add(name);
+                    }
+                }
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
         }
     }
 }
