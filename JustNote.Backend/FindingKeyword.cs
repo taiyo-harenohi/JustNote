@@ -11,15 +11,16 @@ namespace JustNote.Backend
 {
     public class FindingKeyword
     {
-        // parameters in format keyword as "Title" and date "xx/xx/xxxx_xx:xx:xx_xM"
+        // parameters in format keyword as "Title" and date "xx/xx/xxxx"
         // Return: "Title"
         public List<string> FindKeyword(string keyword, string date)
         {
             List<string> result = new List<string>();
 
             date = TrimText(date);
+
             string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
-            
+
             string[] files;
             try
             {
@@ -42,9 +43,7 @@ namespace JustNote.Backend
 
         private string TrimText(string date)
         {
-            string trimmedWhitespace = date.Replace('#', ':');
-
-            return trimmedWhitespace.Replace(@"-", "/");
+            return date.Replace(@"/", "_");
         }
     }
 }

@@ -49,7 +49,7 @@
                 <Button HorizontalAlignment="Left" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0" Command="{Binding SaveDateDataCommand}">
                     <Image Source="Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0"  Command="{Binding DeleteVholeNoteCommand}">
+                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0"  Command="{Binding DeleteWholeNoteCommand}">
                     <Image Source="Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
             </Grid>

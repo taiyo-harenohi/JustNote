@@ -40,7 +40,7 @@ namespace JustNote.App.Viewmodels
             ShowCalendarCommand = new RelayCommand(ShowCalendar);
             ShowSettingCommand = new RelayCommand(ShowSetting);
             SaveDateDataCommand = new RelayCommand(SaveDateData);
-            DeleteVholeNoteCommand = new RelayCommand(DeleteVholeNote);
+            DeleteWholeNoteCommand = new RelayCommand(DeleteWholeNote);
             
             Mediator.Register("SetDate", SetDate);
             Mediator.Register("OpenDate", OpenDate);
@@ -121,7 +121,7 @@ namespace JustNote.App.Viewmodels
         public ICommand ShowSettingCommand { get; }
 
         public ICommand FetchDateData { get; }
-        public ICommand DeleteVholeNoteCommand { get; }
+        public ICommand DeleteWholeNoteCommand { get; }
 
         public ICommand NoteRemoveCommand { get; }
         public ICommand SaveDateDataCommand { get; }
@@ -177,7 +177,7 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        private void DeleteVholeNote()
+        private void DeleteWholeNote()
         {
             _dataService.DeleteDateData(DateData);
             LoadDateData(DateData.Date, null);

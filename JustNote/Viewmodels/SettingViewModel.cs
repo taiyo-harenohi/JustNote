@@ -1,5 +1,5 @@
 ﻿
-// Authors: Nikola Machálková (basic layout and commands) Lukáš Leták (mediator)
+// Author: Lukáš Leták
 
 using System;
 using System.Collections.Generic;

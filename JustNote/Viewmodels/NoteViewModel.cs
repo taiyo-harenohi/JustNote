@@ -1,5 +1,8 @@
 ﻿
-// Author: Lukáš Leták
+// Authors:
+//      Nikola Machálková - LoadGrid function and command
+//            Lukáš Leták – everything else
+
 
 using System;
 using System.Collections.Generic;
