@@ -119,7 +119,8 @@ namespace JustNote.App.Viewmodels
             int[] mouseCoord = { (int)mouseX, (int)mouseY };
             string input = "";
             var note = new Note(_noteID, input, mouseCoord);
-            Notes.Add(note);
+            var NoteVM = new NoteViewModel(note);
+            Notes.Add(NoteVM);
             _noteID++;
         }
 
@@ -145,7 +146,7 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        public ObservableCollection<Note> Notes { get; set; } = new();
+        public ObservableCollection<NoteViewModel> Notes { get; set; } = new();
 
 
         public Data DateData
@@ -203,7 +204,8 @@ namespace JustNote.App.Viewmodels
             {
                 foreach (var note in DateData.Notes)
                 {
-                    Notes.Add(note);
+                    var NoteVM = new NoteViewModel(note);
+                    Notes.Add(NoteVM);
                     _noteID++;
                 }
             }
@@ -219,7 +221,8 @@ namespace JustNote.App.Viewmodels
             DateData.Notes.Clear();
             foreach (var note in Notes)
             {
-                DateData.Notes.Add(note);
+                var normalNote = new Note(note.Key, note.Text, note.Position);
+                DateData.Notes.Add(normalNote);
             }
             _dataService.SaveDateData(DateData);
         }

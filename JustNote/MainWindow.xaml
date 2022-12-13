@@ -113,10 +113,44 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Canvas>
+                                <!--
                                 <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
                                     <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
                                 </Button>
                                 <component:NoteTextbox x:Name="tbNote" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}" Content="{Binding Text}"/>
+                                -->
+                                
+                                <Grid Name="NoteGrid" MinHeight="120" MinWidth="150" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                        <RowDefinition Height="98*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" BorderBrush="#CB997E" BorderThickness="1">
+                                        <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="PreviewMouseDown" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseLBDownCommand}" CommandParameter="{Binding ElementName=DateCanvas}"/>
+                                                </b:EventTrigger>
+
+                                                <b:EventTrigger EventName="PreviewMouseUp" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseLBUpCommand}" />
+                                                </b:EventTrigger>
+
+                                                <b:EventTrigger EventName="PreviewMouseMove" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseMoveCommand}" CommandParameter="{Binding ElementName=DateCanvas}" />
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                            <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0"  Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
+                                                <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <DockPanel Name="dockpanel" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <TextBox Background="#EDDCD2" Text="{Binding Text}" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                            FontSize="35" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+                                    </DockPanel>
+                                </Grid>
                                 
                             </Canvas>
                         </DataTemplate>

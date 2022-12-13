@@ -15,6 +15,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using JustNote.App.Viewmodels;
+using JustNote.App.Services;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace JustNote.App.Components
 {
@@ -37,6 +41,10 @@ namespace JustNote.App.Components
             this.MouseLeftButtonDown += new MouseButtonEventHandler(Control_MouseLeftButtonDown);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(Control_MouseLeftButtonUp);
             this.MouseMove += new MouseEventHandler(Control_MouseMove);
+
+            NoteViewModel viewModel = new NoteViewModel();
+
+            DataContext = viewModel;
         }
 
         // for sizeable note

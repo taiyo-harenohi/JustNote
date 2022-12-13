@@ -9,9 +9,9 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
 
              xmlns:viewModels="clr-namespace:JustNote.App.Viewmodels"
-             xmlns:local="clr-namespace:JustNote.App.Components" d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
+             xmlns:local="clr-namespace:JustNote.App.Components" d:DataContext="{d:DesignInstance Type=viewModels:NoteViewModel}"
              mc:Ignorable="d" MinHeight="120" MinWidth="150">
-    <Grid Name="NoteGrid" MinHeight="120" MinWidth="150">
+    <Grid Name="NoteGrid" MinHeight="120" MinWidth="150" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="98*"></RowDefinition>
