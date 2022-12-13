@@ -20,7 +20,9 @@
             <!-- bind deleting button here -->
             <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     MouseLeftButtonDown="Control_MouseLeftButtonDown" MouseLeftButtonUp="Control_MouseLeftButtonUp" MouseMove="Control_MouseMove">
-                
+                <Button Name="btnCancel" Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
+                    <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
+                </Button>
             </StackPanel>
         </Border>
 
