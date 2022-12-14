@@ -31,6 +31,8 @@ namespace JustNote.App.Viewmodels
         private string _text;
 
         private bool _selected = false;
+
+        private int width;
         public NoteViewModel()
         {
             
@@ -76,7 +78,6 @@ namespace JustNote.App.Viewmodels
             {
                 mouseY = 0;
             }
-            DateCanvas.Width
             
             int[] mouseCoord = { (int)mouseX, (int)mouseY };
 
