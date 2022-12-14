@@ -1,12 +1,12 @@
 # Just Note Install Guide
-**Authors of app**: Nikola Machalkova & Lukas Letak
-**Login**: xmacha80 & xletak00
-**Date**: 14/12/2022
+**Authors of app**: Nikola Machalkova & Lukas Letak  
+**Login**: xmacha80 & xletak00  
+**Date**: 14/12/2022  
 
-*Warning: This app only works on Windows.*
+*Warning: This app only works on Windows.*  
 
 ## Guide
-JustNote can be installed pretty easily by following these steps: 
+JustNote can be installed pretty easily by following these steps:  
 - Click on 'JustInstaler.exe'
 - Go through Installation Wizard 
     * Click 'Next' and Accept the agreement
