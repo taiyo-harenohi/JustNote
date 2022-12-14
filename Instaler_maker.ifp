@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = JustNote
-Program version = 0.1.0
+Program version = 0.1.1
 Windows 2000 = 0
 Windows XP = 1
 Windows Server 2003 = 1
