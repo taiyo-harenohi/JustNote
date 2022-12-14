@@ -59,7 +59,7 @@ namespace JustNote.Backend
                 files[i] = Path.GetFileName(files[i]);
                 files[i] = TrimText(files[i]);
                 files[i] = files[i].Replace(".json", "");
-                string[] title_date = { files[i], dates[i] };
+                string[] title_date = { files[i], RetrimDate(dates[i]) };
                 result.Add(title_date);
             }
             
@@ -70,6 +70,11 @@ namespace JustNote.Backend
         private string TrimText(string date)
         {
             return date.Replace(@"/", "_");
+        }
+
+        private string RetrimDate(string date)
+        {
+            return date.Replace(@"_", "/");
         }
     }
 }
