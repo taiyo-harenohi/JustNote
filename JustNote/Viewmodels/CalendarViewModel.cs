@@ -163,10 +163,10 @@ namespace JustNote.App.Viewmodels
             if (title != null)
             {
                 Data date_to_open = new();
-                date_to_open.Date = DateTime.Parse(title[1]);
+                Debug.WriteLine(title[1]);
+                date_to_open.Date = DateTime.ParseExact(title[1], "dd/MM/yyyy", null);
                 date_to_open.Title = title[0];
                 HideCalendar();
-                Debug.WriteLine(title);
                 Mediator.Send("OpenDate", date_to_open);
             }
         }
