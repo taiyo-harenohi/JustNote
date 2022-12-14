@@ -32,8 +32,8 @@ Vwau = 1
 Website = https://github.com/taiyo-harenohi/JustNote
 Include uninstaller = 1
 Uninstaller filename = Uninstall
-UseCustomDisplayIcon = 0
-CustomDisplayIcon = <InstallPath>\
+UseCustomDisplayIcon = 1
+CustomDisplayIcon = <InstallPath>\Logo.ico
 [Licence]
 Licence dialog = 1
 [Finish]
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = 
+File = C:\Users\Lukáš\Desktop\GtiRepos\JustNote\JustInstaler.exe
 SetupIconPath = ..\icons\ancient.ico
 UninstallIconPath = ..\icons\ancient.ico
 CompressionMethod = 0
@@ -168,9 +168,9 @@ N/A
 C:\Users\Lukáš\Desktop\GtiRepos\JustNote\JustNote\bin\Release\net6.0-windows\zh-Hans\
 N/A
 [Folder]
-C:\Users\Lukáš\Desktop\GtiRepos\JustNote\JustNote\Graphics\Logo.png
-7.2 KB
-png
+C:\Users\Lukáš\Desktop\GtiRepos\JustNote\JustNote\Graphics\Logo.ico
+66.1 KB
+ico
 [Licence_Begin]
 38640
 {\rtf1\ansi\ansicpg1250\deff0\deflang1029{\fonttbl{\f0\fnil\fcharset0 Arial;}}
@@ -859,7 +859,7 @@ Desktop
 JustNote
 <InstallPath>\JustNote.App.exe
 
-<InstallPath>\Logo.png
+<InstallPath>\Logo.ico
 0
 [IFP_End]
 [Serials]
