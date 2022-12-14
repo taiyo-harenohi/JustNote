@@ -57,7 +57,6 @@ namespace JustNote.App.Viewmodels
             if (Grid == null)
                 return;
 
-            var k = (System.Windows.UIElement)Grid;
             AdornerLayer.GetAdornerLayer(Grid).Add(new ResizeNote((System.Windows.UIElement)Grid));
         }
 
@@ -69,6 +68,16 @@ namespace JustNote.App.Viewmodels
                 return;
             var mouseX = Mouse.GetPosition(DateCanvas).X + _positionDX[0];
             var mouseY = Mouse.GetPosition(DateCanvas).Y + _positionDX[1];
+            if (mouseX < 0)
+            {
+                mouseX = 0;
+            }
+            if (mouseY < 0)
+            {
+                mouseY = 0;
+            }
+            DateCanvas.Width
+            
             int[] mouseCoord = { (int)mouseX, (int)mouseY };
 
             Position = mouseCoord;
