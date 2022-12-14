@@ -11,15 +11,25 @@ namespace JustNote.Backend
 {
     public class FindingKeyword
     {
-        // parameters in format keyword as "Title" and date "xx/xx/xxxx"
-        // Return: "Title"
+        // Arguments:
+        //         keyword as "Title" and date "xx/xx/xxxx"
+
+        // Return: list of titles with corresponding keyword
         public List<string[]> FindKeyword(string keyword, string date)
         {
             List<string[]> result = new List<string[]>();
+            if (keyword == null)
+            {
+                return result;
+            }
 
             date = TrimText(date);
 
             string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/";
+            if (!Directory.Exists(filepathDirectory))
+            {
+                return result;
+            }
 
             string[] dateDirs = Directory.GetDirectories(filepathDirectory);
             List<string> files = new();

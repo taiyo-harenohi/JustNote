@@ -1,5 +1,4 @@
-﻿
-// Authors:
+﻿// Authors:
 //  Nikola Machálková – message boxes
 //        Lukáš Leták – the rest
 

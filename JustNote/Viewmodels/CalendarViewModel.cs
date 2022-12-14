@@ -1,5 +1,6 @@
-﻿
-// Author: Lukáš Leták
+﻿// Authors:
+//  Nikola Machálková – message boxes
+//        Lukáš Leták – the rest
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using JustNote.App.Services;
 using JustNote.Backend.Data;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Diagnostics;
+using System.Windows;
 
 namespace JustNote.App.Viewmodels
 {
@@ -109,15 +111,19 @@ namespace JustNote.App.Viewmodels
             }
         }
 
-        //Crates new note in main whenewer selected date changes
+        //Crates a new note whenewer selected date changes
         private static void SendDateToMain(DateTime date)
         {
             Mediator.Send("SetDate", date);
         }
-        //Crates new note in main when you click on the pluss button nexto note (used when you saved note and want to create new in same date)
+        //Crates new note in main when you click on the plus button next to note (used when you saved a note and want to create new with the same date)
         private void NewNote()
         {
-            Mediator.Send("SetDate", SelectedDate);
+            var result = MessageBox.Show("Do you wish to make a new page?", "Notice", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Mediator.Send("SetDate", SelectedDate);
+            }
         }
         
         //Loads all filenemes in selected date
@@ -179,6 +185,7 @@ namespace JustNote.App.Viewmodels
                         KWFiles.Add(name);
                     }
                 }
+                MessageBox.Show($"All files with keyword {Keyword} were found.", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
