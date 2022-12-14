@@ -13,7 +13,6 @@ using iTextSharp.text.pdf;
 
 namespace JustNote.Backend.Data
 {
-    // TODO-delete-later: gonna need some testing of this; as in, this is totally not tested, like, at all
     public class Export
     {
         public static void ExportJSON(Data data, string filepath)

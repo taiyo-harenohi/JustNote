@@ -31,6 +31,7 @@ namespace JustNote.Backend
                 return result;
             }
 
+            // looking for files in directories
             string[] dateDirs = Directory.GetDirectories(filepathDirectory);
             List<string> files = new();
             List<string> dates = new();
@@ -65,6 +66,7 @@ namespace JustNote.Backend
             return result;
         }
 
+        // replaces fobidden character '/ to '_'
         private string TrimText(string date)
         {
             return date.Replace(@"/", "_");

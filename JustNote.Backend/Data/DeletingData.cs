@@ -10,6 +10,10 @@ namespace JustNote.Backend.Data
 {
     public class DeletingData
     {
+        // Arguments:
+        //         data of type Data (structure)
+
+        // Return: -
         public void Delete(Data data)
         {
             string filename = TrimTitle(data.Title);
@@ -19,6 +23,8 @@ namespace JustNote.Backend.Data
 
             File.Delete(filepath);
         }
+
+        // getting rid off forbidden characters
         private string TrimDate(string date)
         {
             return date.Replace(@"/", "_");

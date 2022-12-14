@@ -1,7 +1,5 @@
 ﻿<!-- 
-// Authors: Nikola Machálková – design
-                  Lukáš Leták - data binding & Find Keywords ListView (used instead of a window ViewFoundKeywords.xaml)
--->
+// Author: Nikola Machálková -->
 <UserControl x:Class="JustNote.App.Views.ViewCalendar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -40,7 +38,7 @@
         <!-- binding date and time of the note here-->
         <Label Grid.Row="1" Grid.Column="1" Foreground="#957D60"></Label>
         
-        <!-- bind calendar function - clicking on different date and showing dates according to it, -->
+        <!-- bind calendar function - clicking on different date and showing dates according to it -->
         <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" MinHeight="50" MinWidth="350">
             <Calendar x:Name="calendar" Background="#D0CAB8" BorderThickness="0" Foreground="#C69D7B" SelectedDate="{Binding SelectedDate}" IsTodayHighlighted="False"></Calendar>
         </Viewbox>
@@ -56,6 +54,8 @@
                 <Image Source="../Graphics/add.png" Width="30" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="30"></Image>
             </Button>
         </Grid>
+        
+        <!-- Author: Lukáš Leták - data binding & Find Keywords ListView (used instead of a window ViewFoundKeywords.xaml) --> 
         <ListView Name="NoteList" Grid.Row="6" MaxHeight="110" Grid.ColumnSpan="2" ItemsSource="{Binding Files}" MinHeight="100" Background="#B7B7A4">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="SelectionChanged">
@@ -78,6 +78,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <!--__________________________________________________________________-->
+
+        
         <!-- binding find keyword written below-->
         <Label Grid.Row="8" Grid.ColumnSpan="2" MinHeight="30" Background="#A5A58D" Content="Find Keyword" Foreground="#FFF1E6" FontSize="18" FontStretch="Expanded"></Label>
         <Grid Grid.Row="9" MinHeight="40" Grid.Column="0" Grid.ColumnSpan="2" Background="#B7B7A4">

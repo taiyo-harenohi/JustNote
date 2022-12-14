@@ -16,8 +16,9 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
-        Title="MainWindow" Height="800" Width="1000" MinHeight="500" MinWidth="500"
+        Title="JustNote" Height="800" Width="1000" MinHeight="500" MinWidth="500"
         WindowStartupLocation="CenterScreen">
+    <!-- Author: Lukáš Leták-->
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
@@ -27,6 +28,7 @@
                                  CommandParameter="{Binding Source={x:Static sys:DateTime.Today}}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
+    <!--__________________________________________________________________-->
     <Grid Name="grid">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -61,42 +63,18 @@
             </Button>
             
             <!-- binding Date (has two parts: date and time) here 
-            //Author: Jaromír Otevřel
-            -->
-            <StackPanel Grid.Row="1"
-                        Grid.Column="2"
-                        VerticalAlignment="Bottom"
-                        HorizontalAlignment="Center"
-                        >
-                <TextBlock
-                       FontSize="25"
-                       Foreground="#A5A58D"
-                       Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" >
-                </TextBlock>
-                <TextBlock 
-                       FontSize="25"
-                       Foreground="#A5A58D"
-                       Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}">
-                </TextBlock>
+            // Author: Jaromír Otevřel  -->
+            <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <TextBlock FontSize="25" Foreground="#A5A58D" Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"> </TextBlock>
+                <TextBlock FontSize="25" Foreground="#A5A58D" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}"> </TextBlock>
             </StackPanel>
+            <!--__________________________________________________________________-->
+
 
             <!-- binding Title here -->
-            <TextBox Name="tbTitle"
-                     Grid.Column="3"
-                     Grid.Row="1"
-                     Foreground="#A5A58D"
-                     FontSize="65" 
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     MaxLines="1"
-                     BorderThickness="0"
-                     Background="#FFF1E6"
-                     Text="{Binding Title}"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Stretch">
-            </TextBox>
-        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" 
-              VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
+            <TextBox Name="tbTitle" Grid.Column="3" Grid.Row="1" Foreground="#A5A58D" FontSize="65" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     MaxLines="1" BorderThickness="0" Background="#FFF1E6" Text="{Binding Title}" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"></TextBox>
+        <Line Grid.Column="3" Grid.Row="2" Stroke="#A5A58D" X1="0" X2="3500" VerticalAlignment="Stretch" HorizontalAlignment="Center" StrokeThickness="5"></Line>
             
 			<!-- binding Text here-->
             <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto"
@@ -144,10 +122,12 @@
                                             FontSize="35" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
                                         </DockPanel>
                                     </Grid>
+                                    <!--__________________________________________________________________-->
                                 </Canvas>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <!--__________________________________________________________________-->
                 </Grid>
             </ScrollViewer>
 
@@ -160,7 +140,6 @@
 
         <views:ViewCalendar Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding CalendarViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}"  Width="350" HorizontalAlignment="Left"/>
         <views:ViewSetting  Grid.ColumnSpan="3" Grid.RowSpan="5" Visibility="{Binding SettingViewVisible, Converter={StaticResource BoolToVis}, ConverterParameter=False}"  Width="300" HorizontalAlignment="Right"/>
-        
-        
+
     </Grid>
 </Window>

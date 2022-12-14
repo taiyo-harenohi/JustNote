@@ -13,7 +13,10 @@ namespace JustNote.Backend.Data
 {
     public class SavingData
     {
-        // method for saving data (as in: whole page)
+        // Arguments:
+        //         data Data (structure)
+
+        // Return: -
         public void Save(Data data)
         {
             string trimmedDate = TrimDate(data.Date.ToString("dd/MM/yyyy"));
@@ -32,7 +35,6 @@ namespace JustNote.Backend.Data
 
 
             string filename = TrimTitle(data.Title + ".json");
-
 
             using (StreamWriter sw = new StreamWriter(filepathDirectory + filename))
             {
