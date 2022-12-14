@@ -16,7 +16,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type viewModels:MainViewModel}}"
         Background="#FFF1E6"
-        Title="MainWindow" Height="800" Width="1000" MinHeight="500" MinWidth="500">
+        Title="MainWindow" Height="800" Width="1000" MinHeight="500" MinWidth="500"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
@@ -49,7 +50,7 @@
                 <Button HorizontalAlignment="Left" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0" Command="{Binding SaveDateDataCommand}">
                     <Image Source="Graphics/save1.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0"  Command="{Binding DeleteVholeNoteCommand}">
+                <Button HorizontalAlignment="Right" VerticalAlignment="Center" MinHeight="30" MinWidth="30" Background="Transparent" BorderThickness="0"  Command="{Binding DeleteWholeNoteCommand}">
                     <Image Source="Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
             </Grid>
@@ -58,6 +59,7 @@
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
+            
             <!-- binding Date (has two parts: date and time) here 
             //Author: Jaromír Otevřel
             -->
@@ -99,6 +101,8 @@
 			<!-- binding Text here-->
             <ScrollViewer Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="0,5,0,0" Height="Auto" Width="Auto"
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
+                
+                <!--author Lukáš leták -->
                 <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -119,24 +123,31 @@
                                         <RowDefinition Height="98*"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" BorderBrush="#CB997E" BorderThickness="1">
-                                        <!-- bind deleting button here -->
-                                        <StackPanel Name="NoteSP" MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <StackPanel.InputBindings>
-                                                <MouseBinding Command="{Binding DataContext.MouseMoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" Gesture="LeftDoubleClick"></MouseBinding>
-                                            </StackPanel.InputBindings>
-
-                                            <Button Name="btnCancel" Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
+                                        <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="Loaded">
+                                                    <b:InvokeCommandAction Command="{Binding LoadGridCommand}" CommandParameter="{Binding ElementName=NoteGrid}"></b:InvokeCommandAction>
+                                                </b:EventTrigger>
+                                                <b:EventTrigger EventName="PreviewMouseDown" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseLBDownCommand}" CommandParameter="{Binding ElementName=DateCanvas}"/>
+                                                </b:EventTrigger>
+                                                <b:EventTrigger EventName="PreviewMouseUp" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseLBUpCommand}" />
+                                                </b:EventTrigger>
+                                                <b:EventTrigger EventName="PreviewMouseMove" >
+                                                    <b:InvokeCommandAction Command="{Binding MouseMoveCommand}" CommandParameter="{Binding ElementName=DateCanvas}" />
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                            <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0"  Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
                                                 <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
                                             </Button>
                                         </StackPanel>
                                     </Border>
-
                                     <DockPanel Name="dockpanel" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <TextBox Background="#EDDCD2" Text="{Binding Text}" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                             FontSize="35" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
                                     </DockPanel>
                                 </Grid>
-
                             </Canvas>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

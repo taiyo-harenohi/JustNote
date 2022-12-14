@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
+// Author: Nikola Machálková
+
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,5 +27,14 @@ namespace JustNote.App.Views
         {
             InitializeComponent();
         }
+
+        private async void StackPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            await Task.Delay(3000);
+            MainWindow mW = new MainWindow();
+            mW.Show();
+            this.Close();
+        }
+
     }
 }

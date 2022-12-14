@@ -11,26 +11,32 @@ namespace JustNote.Backend
 {
     public class FindingKeyword
     {
-        // parameters in format keyword as "Title" and date "xx/xx/xxxx_xx:xx:xx_xM"
+        // parameters in format keyword as "Title" and date "xx/xx/xxxx"
         // Return: "Title"
         public List<string> FindKeyword(string keyword, string date)
         {
             List<string> result = new List<string>();
 
             date = TrimText(date);
-            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/" + date + "/";
-            
-            string[] files;
+
+            string filepathDirectory = Directory.GetCurrentDirectory() + @"/.data/";
+
+            string[] dateDirs = Directory.GetDirectories(filepathDirectory);
+            List<string> files = new();
             try
             {
-               files = Directory.GetFiles(filepathDirectory, "*" + keyword + "*");
+                foreach(string dateDir in dateDirs)
+                {
+                    files.AddRange( Directory.GetFiles(dateDir + "/", "*" + keyword + "*"));
+                }
+              
             }
             catch (Exception ex)
             {
                 return result;
             }
 
-            for(int i = 0; i < files.Length; i++)
+            for(int i = 0; i < files.Count; i++)
             {
                 files[i] = Path.GetFileName(files[i]);
                 files[i] = TrimText(files[i]);
@@ -42,9 +48,7 @@ namespace JustNote.Backend
 
         private string TrimText(string date)
         {
-            string trimmedWhitespace = date.Replace('#', ':');
-
-            return trimmedWhitespace.Replace(@"-", "/");
+            return date.Replace(@"/", "_");
         }
     }
 }

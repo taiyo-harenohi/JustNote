@@ -1,5 +1,5 @@
 ﻿
-// Authors: Nikola Machálková (basic layout and commands) Lukáš Leták (mediator)
+// Author: Lukáš Leták
 
 using System;
 using System.Collections.Generic;
@@ -16,16 +16,38 @@ using Microsoft.Toolkit.Mvvm.Input;
 
 namespace JustNote.App.Viewmodels
 {
-    public class SettingViewModel : INotifyPropertyChanged
+    public class SettingViewModel : ViewModelBase
     {
         private IDataService _dataService;
         private bool _settingViewVisible = false;
+        private TextSettingsViewModel _textSettingsViewModel;
+        private ExportViewModel _exportViewModel;
 
         public SettingViewModel(IDataService dataService)
         {
             _dataService = dataService;
             HideSettingCommand = new RelayCommand(HideSetting);
             Mediator.Register("SettingVisible", SettingVisible);
+        }
+
+        public TextSettingsViewModel TextSettingsViewModel
+        {
+            get { return _textSettingsViewModel; }
+            set
+            {
+                _textSettingsViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ExportViewModel ExportViewModel
+        {
+            get { return _exportViewModel; }
+            set
+            {
+                _exportViewModel = value;
+                OnPropertyChanged();
+            }
         }
 
         public ICommand HideSettingCommand { get; }
@@ -57,14 +79,6 @@ namespace JustNote.App.Viewmodels
                 _settingViewVisible = value;
                 OnPropertyChanged();
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
         }
     }
 }
