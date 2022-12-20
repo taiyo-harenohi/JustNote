@@ -1,7 +1,4 @@
-﻿<!-- 
-// Author: Nikola Machálková 
--->
-<Window x:Class="JustNote.MainWindow"
+﻿<Window x:Class="JustNote.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,7 +15,6 @@
         Background="#FFF1E6"
         Title="JustNote" Height="800" Width="1000" MinHeight="500" MinWidth="500"
         WindowStartupLocation="CenterScreen">
-    <!-- Author: Lukáš Leták-->
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
@@ -28,7 +24,7 @@
                                  CommandParameter="{Binding Source={x:Static sys:DateTime.Today}}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <!--__________________________________________________________________-->
+    
     <Grid Name="grid">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -56,19 +52,18 @@
                     <Image Source="Graphics/delete.png" MinHeight="30" MinWidth="30"></Image>
                 </Button>
             </Grid>
+            
             <!-- binding calendar viewmodel here-->
             <Button Grid.Column="1" Grid.Row="1" Width="100" Height="100" Grid.RowSpan="2"
                 Background="Transparent" BorderThickness="0" Command="{Binding ShowCalendarCommand}">
                 <Image Source="Graphics/calendar.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
             </Button>
             
-            <!-- binding Date (has two parts: date and time) here 
-            // Author: Jaromír Otevřel  -->
+            <!-- binding Date (has two parts: date and time) here -->
             <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <TextBlock FontSize="25" Foreground="#A5A58D" Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"> </TextBlock>
                 <TextBlock FontSize="25" Foreground="#A5A58D" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat={}{0:hh:mm}}"> </TextBlock>
             </StackPanel>
-            <!--__________________________________________________________________-->
 
 
             <!-- binding Title here -->
@@ -85,49 +80,15 @@
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CanvasLDClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasLClick}" CommandParameter="{Binding ElementName=DateCanvas}" ></MouseBinding>
                     </Grid.InputBindings>
-                    <!--author Lukáš leták -->
                     <ItemsControl x:Name="ic" ItemsSource="{Binding Notes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Canvas>
-                                    <!-- Author: Nikola Machálková -->
-                                    <Grid Name="NoteGrid" MinHeight="120" MinWidth="150" Canvas.Left="{Binding Position[0]}" Canvas.Top="{Binding Position[1]}">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"></RowDefinition>
-                                            <RowDefinition Height="98*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Border Grid.Row="0" BorderBrush="#CB997E" BorderThickness="1">
-                                            <StackPanel MinHeight="20" Background="#EDDCD2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                <b:Interaction.Triggers>
-                                                    <b:EventTrigger EventName="Loaded">
-                                                        <b:InvokeCommandAction Command="{Binding LoadGridCommand}" CommandParameter="{Binding ElementName=NoteGrid}"></b:InvokeCommandAction>
-                                                    </b:EventTrigger>
-                                                    <b:EventTrigger EventName="PreviewMouseDown" >
-                                                        <b:InvokeCommandAction Command="{Binding MouseLBDownCommand}" CommandParameter="{Binding ElementName=DateCanvas}"/>
-                                                    </b:EventTrigger>
-                                                    <b:EventTrigger EventName="PreviewMouseUp" >
-                                                        <b:InvokeCommandAction Command="{Binding MouseLBUpCommand}" />
-                                                    </b:EventTrigger>
-                                                    <b:EventTrigger EventName="PreviewMouseMove" >
-                                                        <b:InvokeCommandAction Command="{Binding MouseMoveCommand}" CommandParameter="{Binding ElementName=DateCanvas}" />
-                                                    </b:EventTrigger>
-                                                </b:Interaction.Triggers>
-                                                <Button Name="btnCancel" Panel.ZIndex="1" Margin="10,1,0,0"  Command="{Binding DataContext.NoteRemoveCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Key}" HorizontalAlignment="Right" MinHeight="20" Background="Transparent" BorderThickness="0">
-                                                    <Image Height="15" Margin="0,0,0,2" Source="../Graphics/close.png"></Image>
-                                                </Button>
-                                            </StackPanel>
-                                        </Border>
-                                        <DockPanel Name="dockpanel" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <TextBox Background="#EDDCD2" Text="{Binding Text}" Foreground="#C69D7B" AcceptsReturn="True" AcceptsTab="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                            FontSize="35" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
-                                        </DockPanel>
-                                    </Grid>
-                                    <!--__________________________________________________________________-->
+                                    <component:TextNote></component:TextNote>
                                 </Canvas>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <!--__________________________________________________________________-->
                 </Grid>
             </ScrollViewer>
 
